@@ -58,6 +58,36 @@ class SharedFunction
     return self::api_success('Valid.');
   }
   
+  /**
+   * @uses: Validate the email and 4-digit code submitted to the OTP endpoints
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function validate_otp_payload($params, $require_code = true) {
+    $rs = self::api_error('Validation failed.');
+
+    if (empty($params['email'])) {
+      $rs['msg'] = 'Email is required.';
+      return $rs;
+    }
+    if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL)) {
+      $rs['msg'] = 'Email must be a valid address.';
+      return $rs;
+    }
+    if ($require_code) {
+      if (empty($params['code'])) {
+        $rs['msg'] = 'Verification code is required.';
+        return $rs;
+      }
+      if (!preg_match('/^[0-9]{4}$/', (string) $params['code'])) {
+        $rs['msg'] = 'Verification code must be 4 digits.';
+        return $rs;
+      }
+    }
+
+    return self::api_success('Valid.');
+  }
+
   public static function validate_listing_payload($params, $is_update = false) {
     $rs = self::api_error('Validation failed.');
   

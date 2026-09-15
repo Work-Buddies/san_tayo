@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use App\Models\Account\AccountModel;
 use App\Models\Auth\AuthLevelModel;
@@ -55,6 +56,110 @@ class api
   public static function username_exists($username)
   {
     return AccountModel::where('username', $username)->exists();
+  }
+
+  // How long a freshly issued OTP stays valid, and how long a caller must wait before asking for a new one.
+  public const OTP_TTL_MINUTES     = 10;
+  public const OTP_RESEND_SECONDS  = 60;
+
+  /**
+   * @uses: Build the cache keys that hold an email's OTP and its resend cooldown
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function otp_cache_key($email)
+  {
+    return 'otp:' . strtolower(trim($email));
+  }
+
+  public static function otp_resend_key($email)
+  {
+    return 'otp_resend:' . strtolower(trim($email));
+  }
+
+  /**
+   * @uses: Generate a random 4-digit OTP, zero-padded so codes like 0042 stay 4 characters
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function otp_generate()
+  {
+    return str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+  }
+
+  /**
+   * @uses: Cache an OTP for an email and open the resend cooldown window
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function otp_store($email, $code)
+  {
+    $retry_at = now()->addSeconds(self::OTP_RESEND_SECONDS);
+
+    Cache::put(self::otp_cache_key($email), $code, now()->addMinutes(self::OTP_TTL_MINUTES));
+    Cache::put(self::otp_resend_key($email), $retry_at->timestamp, $retry_at);
+
+    return $code;
+  }
+
+  /**
+   * @uses: Compare a submitted OTP against the cached one; a correct code is consumed so it cannot be reused
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function otp_check($email, $code)
+  {
+    $cached = Cache::get(self::otp_cache_key($email));
+
+    if (empty($cached)) {
+      return false;
+    }
+
+    // hash_equals keeps the comparison constant-time so the code cannot be guessed by timing.
+    if (!hash_equals((string) $cached, (string) $code)) {
+      return false;
+    }
+
+    Cache::forget(self::otp_cache_key($email));
+    Cache::forget(self::otp_resend_key($email));
+
+    return true;
+  }
+
+  /**
+   * @uses: Seconds the caller must still wait before a resend is allowed; 0 means resend now
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function otp_resend_wait($email)
+  {
+    $retry_at = Cache::get(self::otp_resend_key($email));
+
+    if (empty($retry_at)) {
+      return 0;
+    }
+
+    return max(0, $retry_at - now()->timestamp);
+  }
+
+  /**
+   * @uses: Move an account to a different auth level, e.g. unverified to user after a valid OTP
+   * @author: Kai Yaneza
+   * Date: 2026-09-12
+   */
+  public static function set_account_auth_level($account, $level)
+  {
+    $auth_level_id = self::get_auth_level_id($level);
+
+    if (empty($auth_level_id)) {
+      return false;
+    }
+
+    $account->auth_level_id = $auth_level_id;
+    $account->save();
+    $account->load('auth_level');
+
+    return true;
   }
 
   public static function format_account($account)

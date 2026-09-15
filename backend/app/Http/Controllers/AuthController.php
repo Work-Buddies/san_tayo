@@ -12,6 +12,16 @@ class AuthController extends Controller
     return response()->json($repo->register($request->all()));
   }
 
+  public function verify_otp(Request $request, AuthRepoInterface $repo)
+  {
+    return response()->json($repo->verify_otp($request->all()));
+  }
+
+  public function resend_otp(Request $request, AuthRepoInterface $repo)
+  {
+    return response()->json($repo->resend_otp($request->all()));
+  }
+
   public function login(Request $request, AuthRepoInterface $repo)
   {
     return response()->json($repo->login($request->all()));

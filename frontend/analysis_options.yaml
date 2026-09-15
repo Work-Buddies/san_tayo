@@ -13,3 +13,7 @@ linter:
   rules:
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
+    # This project names identifiers in snake_case, so the lowerCamelCase lints
+    # would flag every variable and function in the codebase.
+    non_constant_identifier_names: false
+    constant_identifier_names: false

@@ -11,7 +11,7 @@ class ApiConfig {
 
     if (Platform.isAndroid) {
       // Android emulator maps host machine localhost to 10.0.2.2
-      return 'http://10.0.2.2:8000/api';
+      return 'http://192.168.1.7:8000/api';
     }
 
     // iOS simulator, Windows, macOS, Linux
@@ -20,5 +20,5 @@ class ApiConfig {
 
   static const int timeout_seconds = 30;
 
-  static const String client_key = 'your-long-random-secret-here';
+  static const String client_key = 'santayo_09012026_4321423664556';
 }

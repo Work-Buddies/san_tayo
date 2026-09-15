@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   http: ^1.2.2
+  flutter_secure_storage: ^11.0.0
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +20,25 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/logo/
+    - assets/images/icons/
+    - assets/data/
+  fonts:
+    - family: MoreSugar
+      fonts:
+        - asset: assets/fonts/MoreSugar-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/MoreSugar-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/MoreSugar-Extras.ttf
+          weight: 700
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700

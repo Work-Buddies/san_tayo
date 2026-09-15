@@ -14,7 +14,8 @@ class AuthLevelModel extends Model
 
   protected $fillable = ['level'];
 
-  public const LEVEL_ADMIN    = 'admin';
-  public const LEVEL_BUSINESS = 'business';
-  public const LEVEL_USER     = 'user';
+  public const LEVEL_ADMIN      = 'admin';
+  public const LEVEL_BUSINESS   = 'business';
+  public const LEVEL_USER       = 'user';
+  public const LEVEL_UNVERIFIED = 'unverified';
 }

@@ -5,6 +5,8 @@ namespace App\Repositories;
 interface AuthRepoInterface
 {
   public function register($params);
+  public function verify_otp($params);
+  public function resend_otp($params);
   public function login($params);
   public function logout($account);
   public function me($account);

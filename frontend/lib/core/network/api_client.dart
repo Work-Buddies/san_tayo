@@ -66,7 +66,9 @@ Future<ApiResponse> api_request(
 
     return ApiResponse.error('Invalid response format from server.');
   } catch (e) {
-    return ApiResponse.error('Network error: $e');
+    // Nothing usable came back from the server — connection refused, DNS failure,
+    // timeout, or an unparseable body. Never treat this as a rejected session.
+    return ApiResponse.error('Network error: $e', is_network_error: true);
   }
 }
 

@@ -18,6 +18,16 @@ class AuthRepository implements AuthRepoInterface
     return $this->auth_process->register($params);
   }
 
+  public function verify_otp($params)
+  {
+    return $this->auth_process->verify_otp($params);
+  }
+
+  public function resend_otp($params)
+  {
+    return $this->auth_process->resend_otp($params);
+  }
+
   public function login($params)
   {
     return $this->auth_process->login($params);

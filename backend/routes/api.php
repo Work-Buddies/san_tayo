@@ -13,8 +13,10 @@ Route::get('/health', [HealthController::class, 'ping']);
 Route::middleware(['client.key'])->group(function () {
 
   // Public auth
-  Route::post('/auth/register', [AuthController::class, 'register']);
-  Route::post('/auth/login',    [AuthController::class, 'login']);
+  Route::post('/auth/register',   [AuthController::class, 'register']);
+  Route::post('/auth/verify-otp', [AuthController::class, 'verify_otp']);
+  Route::post('/auth/resend-otp', [AuthController::class, 'resend_otp']);
+  Route::post('/auth/login',      [AuthController::class, 'login']);
 
   // Public lookups
   Route::get('/lookups/barangays',        [LookupController::class, 'barangays']);
