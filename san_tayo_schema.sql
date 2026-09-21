@@ -41,14 +41,16 @@ CREATE TABLE listing_status (
 ) ENGINE=InnoDB;
 
 CREATE TABLE barangay (
-    id   CHAR(36)      NOT NULL DEFAULT (UUID()) PRIMARY KEY,
-    name VARCHAR(255)  NOT NULL
+    id             CHAR(36)      NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    name           VARCHAR(255)  NOT null,
+    created_at     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 CREATE TABLE food_type (
     id          CHAR(36)      NOT NULL DEFAULT (UUID()) PRIMARY KEY,
     name        VARCHAR(255)  NOT NULL,
-    description VARCHAR(255)  NOT NULL
+    description VARCHAR(255)  NOT NULL,
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 -- ------------------------------------------------------------
@@ -60,6 +62,7 @@ CREATE TABLE account (
     email          VARCHAR(255)  NOT NULL,
     password_hash  VARCHAR(255)  NOT NULL,
     username       VARCHAR(255)  NOT NULL,
+    image          BLOB          NULL,
     auth_level_id  CHAR(36)      NOT NULL,
     created_at     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -78,6 +81,7 @@ CREATE TABLE landmark (
     name          VARCHAR(255)    NOT NULL,
     map_latitude  DECIMAL(9,6)    NOT NULL,
     map_longitude DECIMAL(9,6)    NOT NULL,
+    created_at    TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_landmark_barangay
         FOREIGN KEY (barangay_id) REFERENCES barangay(id)
@@ -95,6 +99,8 @@ CREATE TABLE listing (
     address_street      VARCHAR(255)  NOT NULL,
     address_purok       VARCHAR(255)  NOT NULL,
     active              BOOLEAN       NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_listing_account
         FOREIGN KEY (account_id) REFERENCES account(id)
@@ -121,6 +127,7 @@ CREATE TABLE listing_img (
     listing_id CHAR(36)      NOT NULL,
     img        BLOB          NOT NULL,
     alt_text   VARCHAR(255),
+    created_at TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP     NULL DEFAULT NULL,
 
     CONSTRAINT fk_listing_img_listing
@@ -135,6 +142,7 @@ CREATE TABLE listing_menu (
     item        VARCHAR(255)   NOT NULL,
     price       DECIMAL(10,2)  NOT NULL,
     description LONGTEXT,
+    created_at  TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at  TIMESTAMP      NULL DEFAULT NULL,
 
     CONSTRAINT fk_listing_menu_listing
@@ -147,6 +155,7 @@ CREATE TABLE listing_food_type (
     id            CHAR(36)   NOT NULL DEFAULT (UUID()) PRIMARY KEY,
     listing_id    CHAR(36)   NOT NULL,
     food_type_id  CHAR(36)   NOT NULL,
+    created_at    TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at    TIMESTAMP  NULL DEFAULT NULL,
 
     CONSTRAINT uq_listing_food_type UNIQUE (listing_id, food_type_id),
@@ -162,6 +171,12 @@ CREATE TABLE listing_food_type (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+create table last_table_updates (
+    id            CHAR(36)   NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    table_name    CHAR(36)   NOT NULL,
+    last_update   TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
 -- ------------------------------------------------------------
 -- Seed data: listing_status / auth_level
 -- ------------------------------------------------------------
@@ -173,6 +188,7 @@ INSERT INTO listing_status (status) VALUES
     ('rejected');
 
 INSERT INTO auth_level (level) VALUES
+    ('unverified'),
     ('admin'),
     ('business'),
     ('user');
@@ -200,6 +216,7 @@ INSERT INTO barangay (name) VALUES
     ('Barangay VIII (Poblacion)'),
     ('Bibirao'),
     ('Borabod'),
+    ('Cobangbang'),
     ('Calasgasan'),
     ('Camambugan'),
     ('Dogongan'),
@@ -207,11 +224,32 @@ INSERT INTO barangay (name) VALUES
     ('Gubat'),
     ('Lag-on'),
     ('Magang'),
+    ('Mambalite'),
     ('Mancruz'),
-    ('Mantugawe'),
     ('Pamorangon'),
     ('San Isidro'),
     ('Tagas');
+
+-- ------------------------------------------------------------
+-- Seed data: landmark
+-- Example landmark data only.
+-- ------------------------------------------------------------
+
+INSERT INTO landmark (barangay_id, name, map_latitude, map_longitude) VALUES
+  ((SELECT id FROM barangay WHERE name = 'Barangay II (Poblacion)'), 'University of Camarines Norte', 14.109268, 122.957283),
+  ((SELECT id FROM barangay WHERE name = 'Bagasbas'), 'Bagasbas Beach', 14.136900, 122.981300),
+  ((SELECT id FROM barangay WHERE name = 'Barangay VI (Poblacion)'), 'St. John the Baptist Parish Church', 14.112245, 122.956322),
+  ((SELECT id FROM barangay WHERE name = 'Barangay II (Poblacion)'), 'Camarines Norte Capitol', 14.113300, 122.954900),
+  ((SELECT id FROM barangay WHERE name = 'Barangay II (Poblacion)'), 'Vinzons Park (Freedom Park)', 14.113500, 122.955100),
+  ((SELECT id FROM barangay WHERE name = 'Barangay IV (Poblacion)'), 'Daet Public Market', 14.112800, 122.955800),
+  ((SELECT id FROM barangay WHERE name = 'Barangay IV (Poblacion)'), 'Daet Bus Terminal', 14.114800, 122.952000),
+  ((SELECT id FROM barangay WHERE name = 'Barangay IV (Poblacion)'), 'Mercury Drug Vinzons Avenue', 14.115500, 122.957500),
+  ((SELECT id FROM barangay WHERE name = 'Barangay VI (Poblacion)'), 'Daet Fire Station', 14.114000, 122.956000);
+
+-- Clients store a last_updated stamp and skip a refresh when that stamp is
+-- today and MAX(last_table_updates.last_update) is still yesterday.
+INSERT INTO last_table_updates (table_name, last_update) VALUES
+  ('landmark', NOW());
 
 -- ------------------------------------------------------------
 -- Seed data: food_type (common cuisine/category tags for PH/Daet

@@ -64,6 +64,8 @@ class LandmarkProcess
 
     $landmark->load('barangay');
 
+    api::touch_table_update('landmark');
+
     $rs = SharedFunction::api_success('Landmark created.', [
       'id'            => $landmark->id,
       'name'          => $landmark->name,
@@ -116,6 +118,7 @@ class LandmarkProcess
 
     $landmark->save();
     $landmark->load('barangay');
+    api::touch_table_update('landmark');
 
     $rs = SharedFunction::api_success('Landmark updated.', [
       'id'            => $landmark->id,

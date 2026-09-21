@@ -20,4 +20,9 @@ class LookupController extends Controller
   {
     return response()->json($repo->listing_statuses());
   }
+
+  public function last_table_updates(LookupRepoInterface $repo)
+  {
+    return response()->json($repo->last_table_updates());
+  }
 }

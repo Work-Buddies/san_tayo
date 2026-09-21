@@ -15,6 +15,7 @@ use App\Models\Listing\ListingFoodTypeModel;
 use App\Models\Listing\ListingStatusModel;
 use App\Models\Location\BarangayModel;
 use App\Models\Location\LandmarkModel;
+use App\Models\Lookup\LastTableUpdateModel;
 
 class api
 {
@@ -304,6 +305,59 @@ class api
   public static function get_listing_statuses()
   {
     return ListingStatusModel::orderBy('status')->get();
+  }
+
+  /**
+   * @uses: Return every last_table_updates row, seeding landmark if the table is empty
+   * @author: Kai Yaneza
+   * Date: 2026-09-19
+   */
+  public static function get_last_table_updates()
+  {
+    self::ensure_table_update('landmark', LandmarkModel::query()->max('created_at'));
+
+    return LastTableUpdateModel::query()
+      ->orderBy('table_name')
+      ->get();
+  }
+
+  /**
+   * @uses: Stamp last_table_updates for a table so clients know their cache is stale
+   * @author: Kai Yaneza
+   * Date: 2026-09-19
+   */
+  public static function touch_table_update($table_name)
+  {
+    $row = LastTableUpdateModel::where('table_name', $table_name)->first();
+
+    if (!empty($row)) {
+      $row->last_update = now();
+      $row->save();
+      return $row;
+    }
+
+    return LastTableUpdateModel::create([
+      'table_name'  => $table_name,
+      'last_update' => now(),
+    ]);
+  }
+
+  /**
+   * @uses: Insert a last_table_updates row only when that table has never been stamped
+   * @author: Kai Yaneza
+   * Date: 2026-09-19
+   */
+  public static function ensure_table_update($table_name, $fallback_time)
+  {
+    $exists = LastTableUpdateModel::where('table_name', $table_name)->exists();
+    if ($exists) {
+      return;
+    }
+
+    LastTableUpdateModel::create([
+      'table_name'  => $table_name,
+      'last_update' => $fallback_time ?? now(),
+    ]);
   }
 
   public static function get_landmarks()

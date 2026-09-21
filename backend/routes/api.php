@@ -19,9 +19,11 @@ Route::middleware(['client.key'])->group(function () {
   Route::post('/auth/login',      [AuthController::class, 'login']);
 
   // Public lookups
-  Route::get('/lookups/barangays',        [LookupController::class, 'barangays']);
-  Route::get('/lookups/food-types',       [LookupController::class, 'food_types']);
-  Route::get('/lookups/listing-statuses', [LookupController::class, 'listing_statuses']);
+  Route::get('/lookups/barangays',          [LookupController::class, 'barangays']);
+  Route::get('/lookups/food-types',         [LookupController::class, 'food_types']);
+  Route::get('/lookups/listing-statuses',   [LookupController::class, 'listing_statuses']);
+  Route::get('/lookups/last-table-updates', [LookupController::class, 'last_table_updates']);
+  Route::get('/landmarks',                  [LandmarkController::class, 'index']);
 
   // Public browse (students) — approved + active only
   Route::get('/listings',      [ListingController::class, 'index']);
@@ -37,7 +39,6 @@ Route::middleware(['client.key'])->group(function () {
       ->middleware('auth.level:user');
 
     // Landmarks
-    Route::get('/landmarks',             [LandmarkController::class, 'index']);
     Route::post('/landmarks',            [LandmarkController::class, 'store'])
       ->middleware('auth.level:business,admin');
     Route::put('/landmarks/{id}',        [LandmarkController::class, 'update'])

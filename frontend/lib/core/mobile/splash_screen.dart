@@ -71,8 +71,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final Widget next = switch (destination) {
       StartDestination.dashboard       => const mobile_dash.Dashboard(),
-      StartDestination.sign_in_online  => const mobile_auth.SignInUp(),
-      StartDestination.sign_in_offline => const mobile_auth.SignInUp(is_offline: true),
+      StartDestination.sign_in_online  => const mobile_auth.SignInScreen(),
+      StartDestination.sign_in_offline => const mobile_auth.SignInScreen(isOffline: true),
     };
 
     Navigator.of(context).pushReplacement(

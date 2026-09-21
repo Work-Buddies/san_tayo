@@ -1,0 +1,3152 @@
+[
+	{
+			"id": "1",
+			"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+			"name": "Everything Chicken",
+			"description": "A cozy little spot in Daet serving up Chicken Adobo the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "San Isidro",
+					"purok": "8",
+					"street": "Camambugan Road"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Chicken Adobo",
+							"description": "Bicol-style chicken adobo.",
+							"price": "60.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "175.00"
+					},
+					{
+							"item": "Fried Chicken Skin",
+							"description": "Crispy deep-fried chicken skin, a popular pulutan.",
+							"price": "95.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "180.00"
+					},
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "2",
+			"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+			"name": "Bicol Express Kitchen",
+			"description": "A favorite hangout near Bagasbas Beach, known for generous servings of Longsilog.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Borabod",
+					"purok": "4",
+					"street": "Vinzons Avenue"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "95.00"
+					},
+					{
+							"item": "Laing",
+							"description": "Taro leaves cooked in coconut milk and chili.",
+							"price": "110.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "3",
+			"image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+			"name": "Sisig Central Daet",
+			"description": "From sizzling plates to comforting bowls, our Longsilog keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Daet Public Market",
+			"address": {
+					"barangay": "Bagasbas",
+					"purok": "8",
+					"street": "J. Lukban Street"
+			},
+			"minPrice": 90,
+			"menu": [
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "105.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "90.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "145.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "4",
+			"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+			"name": "Kambingan sa Bagasbas",
+			"description": "Simple, affordable, and delicious — our Lomi is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Barangay VI (Poblacion)",
+					"purok": "8",
+					"street": "Ninoy Aquino Avenue"
+			},
+			"minPrice": 25,
+			"menu": [
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "85.00"
+					},
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "35.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "25.00"
+					},
+					{
+							"item": "Tinolang Manok",
+							"description": "Chicken soup with ginger, green papaya, and chili leaves.",
+							"price": "135.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "55.00"
+					},
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "150.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "5",
+			"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+			"name": "Lechon Manok Express",
+			"description": "Bringing the true taste of Bicol to your table, one order of Pancit Malabon at a time.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Mambalite",
+					"purok": "1",
+					"street": "Vinzons Avenue"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Pancit Malabon",
+							"description": "Thick rice noodles in a savory seafood sauce.",
+							"price": "125.00"
+					},
+					{
+							"item": "Sinigang na Baboy",
+							"description": "Sour pork soup with tamarind broth.",
+							"price": "170.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "110.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "6",
+			"image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+			"name": "Kinilaw Point",
+			"description": "Home of the best Bulalo in Camarines Norte! Come hungry, leave happy.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Gahonon",
+					"purok": "5",
+					"street": "Ninoy Aquino Avenue"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Bulalo",
+							"description": "Beef shank and marrow soup slow-cooked until tender.",
+							"price": "250.00"
+					},
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "30.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "185.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "7",
+			"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+			"name": "Halo-Halo Haven",
+			"description": "We take pride in our Kare-Kare, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "St. John the Baptist Parish Church",
+			"address": {
+					"barangay": "Tagas",
+					"purok": "3",
+					"street": "Daet-Basud Road"
+			},
+			"minPrice": 105,
+			"menu": [
+					{
+							"item": "Kare-Kare",
+							"description": "Oxtail and vegetables in a rich peanut sauce.",
+							"price": "220.00"
+					},
+					{
+							"item": "Batchoy",
+							"description": "Noodle soup topped with pork innards and crushed chicharon.",
+							"price": "105.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "190.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "180.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "155.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "8",
+			"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+			"name": "Pancit Malabon Place",
+			"description": "Bringing the true taste of Bicol to your table, one order of Halo-Halo at a time.",
+			"nearestLandmark": "Daet Bus Terminal",
+			"address": {
+					"barangay": "Gubat",
+					"purok": "2",
+					"street": "Pili Drive"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Halo-Halo",
+							"description": "Shaved ice mixed with sweet beans, fruits, and topped with leche flan.",
+							"price": "65.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "45.00"
+					},
+					{
+							"item": "Pork BBQ",
+							"description": "Sweet and savory grilled pork skewers.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "9",
+			"image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+			"name": "Inasal Express Daet",
+			"description": "Bringing the true taste of Bicol to your table, one order of Sinigang na Baboy at a time.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Pamorangon",
+					"purok": "8",
+					"street": "F. Pimentel Street"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Sinigang na Baboy",
+							"description": "Sour pork soup with tamarind broth.",
+							"price": "165.00"
+					},
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "160.00"
+					},
+					{
+							"item": "Grilled Liempo",
+							"description": "Charcoal-grilled marinated pork belly.",
+							"price": "145.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "10",
+			"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+			"name": "Taba ng Talangka Grill",
+			"description": "From sizzling plates to comforting bowls, our Pancit Bihon keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Barangay VI (Poblacion)",
+					"purok": "1",
+					"street": "Vinzons Avenue"
+			},
+			"minPrice": 100,
+			"menu": [
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "100.00"
+					},
+					{
+							"item": "Tinolang Manok",
+							"description": "Chicken soup with ginger, green papaya, and chili leaves.",
+							"price": "140.00"
+					},
+					{
+							"item": "Bicol Express",
+							"description": "Pork simmered in coconut milk and chili, a Bicolano classic.",
+							"price": "145.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "11",
+			"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+			"name": "Daet Seafood Grill",
+			"description": "Home of the best Bicol Express in Camarines Norte! Come hungry, leave happy.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Alawihao",
+					"purok": "7",
+					"street": "Ninoy Aquino Avenue"
+			},
+			"minPrice": 15,
+			"menu": [
+					{
+							"item": "Bicol Express",
+							"description": "Pork simmered in coconut milk and chili, a Bicolano classic.",
+							"price": "125.00"
+					},
+					{
+							"item": "Isaw",
+							"description": "Grilled chicken or pork intestines on skewers.",
+							"price": "15.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "105.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "85.00"
+					},
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "170.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Dessert",
+							"description": "Sweet treats and snacks enjoyed after a meal."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "12",
+			"image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+			"name": "Bagasbas Beach Grill",
+			"description": "Serving authentic Bicolano flavors, famous for our Kinilaw na Tanigue. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Lag-on",
+					"purok": "3",
+					"street": "Maharlika Highway"
+			},
+			"minPrice": 140,
+			"menu": [
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "190.00"
+					},
+					{
+							"item": "Grilled Bangus",
+							"description": "Charcoal-grilled milkfish stuffed with tomatoes and onions.",
+							"price": "180.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "140.00"
+					},
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "150.00"
+					},
+					{
+							"item": "Kaldereta",
+							"description": "Meat stew cooked in tomato sauce with liver spread.",
+							"price": "155.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "13",
+			"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+			"name": "Tapsilog Corner",
+			"description": "From sizzling plates to comforting bowls, our Adobong Pusit keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Daet Fire Station",
+			"address": {
+					"barangay": "Barangay III (Poblacion)",
+					"purok": "7",
+					"street": "Pili Drive"
+			},
+			"minPrice": 15,
+			"menu": [
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "140.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "90.00"
+					},
+					{
+							"item": "Bicol Express",
+							"description": "Pork simmered in coconut milk and chili, a Bicolano classic.",
+							"price": "150.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "85.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "15.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "14",
+			"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+			"name": "Bicolana Kusina",
+			"description": "A favorite hangout near Mercury Drug Vinzons Avenue, known for generous servings of Lechon Kawali.",
+			"nearestLandmark": "Mercury Drug Vinzons Avenue",
+			"address": {
+					"barangay": "Calasgasan",
+					"purok": "1",
+					"street": "Moreno Street"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "165.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "95.00"
+					},
+					{
+							"item": "Chicken Adobo",
+							"description": "Bicol-style chicken adobo.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Dessert",
+							"description": "Sweet treats and snacks enjoyed after a meal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "15",
+			"image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800",
+			"name": "Crispy Pata House",
+			"description": "Home of the best Arroz Caldo in Camarines Norte! Come hungry, leave happy.",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Dogongan",
+					"purok": "2",
+					"street": "Alfelor Street"
+			},
+			"minPrice": 40,
+			"menu": [
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "40.00"
+					},
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "165.00"
+					},
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "55.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "16",
+			"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+			"name": "Sinigang sa Daet",
+			"description": "We take pride in our Bangus sa Gata, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Awitan",
+					"purok": "5",
+					"street": "Moreno Street"
+			},
+			"minPrice": 40,
+			"menu": [
+					{
+							"item": "Bangus sa Gata",
+							"description": "Milkfish simmered in coconut milk.",
+							"price": "165.00"
+					},
+					{
+							"item": "Kare-Kare",
+							"description": "Oxtail and vegetables in a rich peanut sauce.",
+							"price": "235.00"
+					},
+					{
+							"item": "Bibingka",
+							"description": "Baked rice cake topped with cheese and salted egg.",
+							"price": "40.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "105.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "17",
+			"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+			"name": "Kare-Kare Kitchen",
+			"description": "Home of the best Sinigang na Baboy in Camarines Norte! Come hungry, leave happy.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Barangay IV (Poblacion)",
+					"purok": "6",
+					"street": "Moreno Street"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Sinigang na Baboy",
+							"description": "Sour pork soup with tamarind broth.",
+							"price": "160.00"
+					},
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "150.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "45.00"
+					},
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "45.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "155.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "18",
+			"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+			"name": "Balut Express",
+			"description": "Serving authentic Bicolano flavors, famous for our Lechon Kawali. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Daet Public Market",
+			"address": {
+					"barangay": "Bibirao",
+					"purok": "5",
+					"street": "Barlin Street"
+			},
+			"minPrice": 20,
+			"menu": [
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "190.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "85.00"
+					},
+					{
+							"item": "Balut",
+							"description": "Fertilized duck egg, a classic Filipino street food.",
+							"price": "20.00"
+					},
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "50.00"
+					},
+					{
+							"item": "Sago't Gulaman",
+							"description": "Refreshing drink with tapioca pearls and gelatin.",
+							"price": "35.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1541014741259-de529411b96a?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "19",
+			"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+			"name": "Lomi House Daet",
+			"description": "A cozy little spot in Daet serving up Goto the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Barangay I (Poblacion)",
+					"purok": "3",
+					"street": "Zamora Street"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "55.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "145.00"
+					},
+					{
+							"item": "Kaldereta",
+							"description": "Meat stew cooked in tomato sauce with liver spread.",
+							"price": "155.00"
+					},
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "20",
+			"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+			"name": "Grilled Liempo Station",
+			"description": "Serving authentic Bicolano flavors, famous for our Lechon Kawali. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Cobangbang",
+					"purok": "5",
+					"street": "Three Kings"
+			},
+			"minPrice": 35,
+			"menu": [
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "170.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "70.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "35.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "175.00"
+					},
+					{
+							"item": "Chicken Adobo",
+							"description": "Bicol-style chicken adobo.",
+							"price": "65.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "21",
+			"image": "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800",
+			"name": "Bulalo Bonanza",
+			"description": "A cozy little spot in Daet serving up Crispy Pata the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Cobangbang",
+					"purok": "6",
+					"street": "J. Lukban Street"
+			},
+			"minPrice": 85,
+			"menu": [
+					{
+							"item": "Crispy Pata",
+							"description": "Deep-fried pork leg, crispy on the outside, tender inside.",
+							"price": "300.00"
+					},
+					{
+							"item": "Tapsilog",
+							"description": "Cured beef, garlic rice, and fried egg.",
+							"price": "95.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "140.00"
+					},
+					{
+							"item": "Kaldereta",
+							"description": "Meat stew cooked in tomato sauce with liver spread.",
+							"price": "175.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "85.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "22",
+			"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+			"name": "Chicharon Bulaklak Bar",
+			"description": "We take pride in our Kilawin Kambing, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "St. John the Baptist Parish Church",
+			"address": {
+					"barangay": "Magang",
+					"purok": "2",
+					"street": "Barlin Street"
+			},
+			"minPrice": 85,
+			"menu": [
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "150.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "85.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "85.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "175.00"
+					},
+					{
+							"item": "Pinangat",
+							"description": "Taro leaves wrapped and stuffed with fish or meat, cooked in coconut milk.",
+							"price": "105.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "95.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "23",
+			"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+			"name": "Sizzling Sisig Stop",
+			"description": "Simple, affordable, and delicious — our Tapsilog is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "Daet Bus Terminal",
+			"address": {
+					"barangay": "Bagasbas",
+					"purok": "6",
+					"street": "Zamora Street"
+			},
+			"minPrice": 10,
+			"menu": [
+					{
+							"item": "Tapsilog",
+							"description": "Cured beef, garlic rice, and fried egg.",
+							"price": "110.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "60.00"
+					},
+					{
+							"item": "Isaw",
+							"description": "Grilled chicken or pork intestines on skewers.",
+							"price": "10.00"
+					},
+					{
+							"item": "Bangus sa Gata",
+							"description": "Milkfish simmered in coconut milk.",
+							"price": "150.00"
+					},
+					{
+							"item": "Kaldereta",
+							"description": "Meat stew cooked in tomato sauce with liver spread.",
+							"price": "170.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "24",
+			"image": "https://images.unsplash.com/photo-1541014741259-de529411b96a?w=800",
+			"name": "Dinuguan Delight",
+			"description": "We take pride in our Halo-Halo, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Barangay II (Poblacion)",
+					"purok": "2",
+					"street": "Ninoy Aquino Avenue"
+			},
+			"minPrice": 10,
+			"menu": [
+					{
+							"item": "Halo-Halo",
+							"description": "Shaved ice mixed with sweet beans, fruits, and topped with leche flan.",
+							"price": "75.00"
+					},
+					{
+							"item": "Isaw",
+							"description": "Grilled chicken or pork intestines on skewers.",
+							"price": "10.00"
+					},
+					{
+							"item": "Kare-Kare",
+							"description": "Oxtail and vegetables in a rich peanut sauce.",
+							"price": "240.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "80.00"
+					},
+					{
+							"item": "Bibingka",
+							"description": "Baked rice cake topped with cheese and salted egg.",
+							"price": "40.00"
+					},
+					{
+							"item": "Menudo",
+							"description": "Diced pork and liver stewed in tomato sauce.",
+							"price": "135.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "25",
+			"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+			"name": "Camarines Kakanin House",
+			"description": "Simple, affordable, and delicious — our Isaw is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "San Isidro",
+					"purok": "1",
+					"street": "F. Pimentel Street"
+			},
+			"minPrice": 10,
+			"menu": [
+					{
+							"item": "Isaw",
+							"description": "Grilled chicken or pork intestines on skewers.",
+							"price": "10.00"
+					},
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "50.00"
+					},
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "160.00"
+					},
+					{
+							"item": "Grilled Bangus",
+							"description": "Charcoal-grilled milkfish stuffed with tomatoes and onions.",
+							"price": "175.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "50.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "26",
+			"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+			"name": "Bicol Pili Sweets",
+			"description": "We take pride in our Batchoy, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Borabod",
+					"purok": "4",
+					"street": "Vinzons Avenue"
+			},
+			"minPrice": 35,
+			"menu": [
+					{
+							"item": "Batchoy",
+							"description": "Noodle soup topped with pork innards and crushed chicharon.",
+							"price": "105.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "140.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "165.00"
+					},
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "35.00"
+					},
+					{
+							"item": "Halo-Halo",
+							"description": "Shaved ice mixed with sweet beans, fruits, and topped with leche flan.",
+							"price": "60.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Dessert",
+							"description": "Sweet treats and snacks enjoyed after a meal."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "27",
+			"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+			"name": "Turon Corner",
+			"description": "From sizzling plates to comforting bowls, our Tinolang Manok keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Bagasbas",
+					"purok": "1",
+					"street": "J. Lukban Street"
+			},
+			"minPrice": 90,
+			"menu": [
+					{
+							"item": "Tinolang Manok",
+							"description": "Chicken soup with ginger, green papaya, and chili leaves.",
+							"price": "145.00"
+					},
+					{
+							"item": "Menudo",
+							"description": "Diced pork and liver stewed in tomato sauce.",
+							"price": "115.00"
+					},
+					{
+							"item": "Bulalo",
+							"description": "Beef shank and marrow soup slow-cooked until tender.",
+							"price": "245.00"
+					},
+					{
+							"item": "Chicken Inasal",
+							"description": "Grilled chicken marinated in calamansi, pepper, and vinegar.",
+							"price": "90.00"
+					},
+					{
+							"item": "Crispy Pata",
+							"description": "Deep-fried pork leg, crispy on the outside, tender inside.",
+							"price": "275.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "28",
+			"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+			"name": "Bibingka House Daet",
+			"description": "Serving authentic Bicolano flavors, famous for our Kinilaw na Tanigue. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Daet Fire Station",
+			"address": {
+					"barangay": "Barangay VI (Poblacion)",
+					"purok": "8",
+					"street": "Daet-Basud Road"
+			},
+			"minPrice": 95,
+			"menu": [
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "190.00"
+					},
+					{
+							"item": "Tinolang Manok",
+							"description": "Chicken soup with ginger, green papaya, and chili leaves.",
+							"price": "155.00"
+					},
+					{
+							"item": "Dinuguan",
+							"description": "Pork blood stew simmered with vinegar and chili.",
+							"price": "95.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "29",
+			"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+			"name": "Daet Fishball Stand",
+			"description": "Bringing the true taste of Bicol to your table, one order of Taba ng Talangka Rice at a time.",
+			"nearestLandmark": "Mercury Drug Vinzons Avenue",
+			"address": {
+					"barangay": "Mambalite",
+					"purok": "5",
+					"street": "Vinzons Avenue"
+			},
+			"minPrice": 10,
+			"menu": [
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "65.00"
+					},
+					{
+							"item": "Sago't Gulaman",
+							"description": "Refreshing drink with tapioca pearls and gelatin.",
+							"price": "25.00"
+					},
+					{
+							"item": "Isaw",
+							"description": "Grilled chicken or pork intestines on skewers.",
+							"price": "30.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "165.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "10.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "30",
+			"image": "https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?w=800",
+			"name": "Isaw Alley",
+			"description": "Simple, affordable, and delicious — our Lomi is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Gahonon",
+					"purok": "8",
+					"street": "Zamora Street"
+			},
+			"minPrice": 25,
+			"menu": [
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "80.00"
+					},
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "50.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "50.00"
+					},
+					{
+							"item": "Balut",
+							"description": "Fertilized duck egg, a classic Filipino street food.",
+							"price": "25.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "31",
+			"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+			"name": "Sago't Gulaman Stand",
+			"description": "From sizzling plates to comforting bowls, our Sisig keeps locals and tourists coming back for more.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Tagas",
+					"purok": "7",
+					"street": "Barlin Street"
+			},
+			"minPrice": 50,
+			"menu": [
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "165.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "125.00"
+					},
+					{
+							"item": "Grilled Bangus",
+							"description": "Charcoal-grilled milkfish stuffed with tomatoes and onions.",
+							"price": "155.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "85.00"
+					},
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "50.00"
+					},
+					{
+							"item": "Chicken Inasal",
+							"description": "Grilled chicken marinated in calamansi, pepper, and vinegar.",
+							"price": "100.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "32",
+			"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+			"name": "Goto King",
+			"description": "Serving authentic Bicolano flavors, famous for our Chicken Inasal. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Gubat",
+					"purok": "5",
+					"street": "Three Kings"
+			},
+			"minPrice": 60,
+			"menu": [
+					{
+							"item": "Chicken Inasal",
+							"description": "Grilled chicken marinated in calamansi, pepper, and vinegar.",
+							"price": "95.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "100.00"
+					},
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "60.00"
+					},
+					{
+							"item": "Bangus sa Gata",
+							"description": "Milkfish simmered in coconut milk.",
+							"price": "150.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "165.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "155.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "33",
+			"image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+			"name": "Arroz Caldo Central",
+			"description": "A cozy little spot in Daet serving up Arroz Caldo the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "Daet Public Market",
+			"address": {
+					"barangay": "Pamorangon",
+					"purok": "4",
+					"street": "Moreno Street"
+			},
+			"minPrice": 40,
+			"menu": [
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "55.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "125.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "150.00"
+					},
+					{
+							"item": "Fried Chicken Skin",
+							"description": "Crispy deep-fried chicken skin, a popular pulutan.",
+							"price": "90.00"
+					},
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "40.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "85.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "34",
+			"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+			"name": "Fried Chicken Skin Bar",
+			"description": "Serving authentic Bicolano flavors, famous for our Sago't Gulaman. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Barangay VI (Poblacion)",
+					"purok": "2",
+					"street": "Alfelor Street"
+			},
+			"minPrice": 25,
+			"menu": [
+					{
+							"item": "Sago't Gulaman",
+							"description": "Refreshing drink with tapioca pearls and gelatin.",
+							"price": "25.00"
+					},
+					{
+							"item": "Bulalo",
+							"description": "Beef shank and marrow soup slow-cooked until tender.",
+							"price": "225.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "110.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "35",
+			"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+			"name": "Pork BBQ Junction",
+			"description": "A favorite hangout near Camarines Norte Capitol, known for generous servings of Lugaw.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Alawihao",
+					"purok": "2",
+					"street": "Pili Drive"
+			},
+			"minPrice": 40,
+			"menu": [
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "40.00"
+					},
+					{
+							"item": "Pinangat",
+							"description": "Taro leaves wrapped and stuffed with fish or meat, cooked in coconut milk.",
+							"price": "125.00"
+					},
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "60.00"
+					},
+					{
+							"item": "Chicken Inasal",
+							"description": "Grilled chicken marinated in calamansi, pepper, and vinegar.",
+							"price": "85.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "36",
+			"image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+			"name": "Grilled Bangus House",
+			"description": "We take pride in our Tapsilog, cooked fresh daily using local Bicol ingredients.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Lag-on",
+					"purok": "8",
+					"street": "Ninoy Aquino Avenue"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Tapsilog",
+							"description": "Cured beef, garlic rice, and fried egg.",
+							"price": "115.00"
+					},
+					{
+							"item": "Balut",
+							"description": "Fertilized duck egg, a classic Filipino street food.",
+							"price": "30.00"
+					},
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "170.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "37",
+			"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+			"name": "Kilawin Kambing Grill",
+			"description": "A favorite hangout near St. John the Baptist Parish Church, known for generous servings of Kinilaw na Tanigue.",
+			"nearestLandmark": "St. John the Baptist Parish Church",
+			"address": {
+					"barangay": "Barangay III (Poblacion)",
+					"purok": "4",
+					"street": "Bagasbas Road"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "180.00"
+					},
+					{
+							"item": "Dinuguan",
+							"description": "Pork blood stew simmered with vinegar and chili.",
+							"price": "115.00"
+					},
+					{
+							"item": "Chicharon Bulaklak",
+							"description": "Deep-fried pork mesentery, crispy Filipino snack.",
+							"price": "135.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					},
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+							"alt_text": "A closer look at the food."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "38",
+			"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+			"name": "Tinolang Manok Place",
+			"description": "Home of the best Bibingka in Camarines Norte! Come hungry, leave happy.",
+			"nearestLandmark": "Daet Bus Terminal",
+			"address": {
+					"barangay": "Calasgasan",
+					"purok": "7",
+					"street": "Moreno Street"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Bibingka",
+							"description": "Baked rice cake topped with cheese and salted egg.",
+							"price": "35.00"
+					},
+					{
+							"item": "Sago't Gulaman",
+							"description": "Refreshing drink with tapioca pearls and gelatin.",
+							"price": "30.00"
+					},
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "155.00"
+					},
+					{
+							"item": "Longsilog",
+							"description": "Filipino sausage, garlic rice, and fried egg.",
+							"price": "80.00"
+					},
+					{
+							"item": "Goto",
+							"description": "Rice porridge with beef tripe.",
+							"price": "50.00"
+					},
+					{
+							"item": "Chicken Inasal",
+							"description": "Grilled chicken marinated in calamansi, pepper, and vinegar.",
+							"price": "100.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1541014741259-de529411b96a?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "39",
+			"image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+			"name": "Menudo Meals",
+			"description": "Simple, affordable, and delicious — our Turon is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Dogongan",
+					"purok": "6",
+					"street": "Camambugan Road"
+			},
+			"minPrice": 15,
+			"menu": [
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "15.00"
+					},
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "90.00"
+					},
+					{
+							"item": "Grilled Liempo",
+							"description": "Charcoal-grilled marinated pork belly.",
+							"price": "140.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "55.00"
+					},
+					{
+							"item": "Pork BBQ",
+							"description": "Sweet and savory grilled pork skewers.",
+							"price": "15.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "90.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Noodles",
+							"description": "Dishes made with pancit or other noodle varieties."
+					},
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "40",
+			"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+			"name": "Afritada Kitchen",
+			"description": "From sizzling plates to comforting bowls, our Fried Chicken Skin keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Awitan",
+					"purok": "8",
+					"street": "Camambugan Road"
+			},
+			"minPrice": 35,
+			"menu": [
+					{
+							"item": "Fried Chicken Skin",
+							"description": "Crispy deep-fried chicken skin, a popular pulutan.",
+							"price": "95.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "140.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "100.00"
+					},
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "35.00"
+					},
+					{
+							"item": "Pancit Malabon",
+							"description": "Thick rice noodles in a savory seafood sauce.",
+							"price": "120.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "41",
+			"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+			"name": "Adobong Pusit Place",
+			"description": "A favorite hangout near Camarines Norte Capitol, known for generous servings of Puto Bumbong.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Barangay IV (Poblacion)",
+					"purok": "3",
+					"street": "Camambugan Road"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "45.00"
+					},
+					{
+							"item": "Chicharon Bulaklak",
+							"description": "Deep-fried pork mesentery, crispy Filipino snack.",
+							"price": "130.00"
+					},
+					{
+							"item": "Halo-Halo",
+							"description": "Shaved ice mixed with sweet beans, fruits, and topped with leche flan.",
+							"price": "70.00"
+					},
+					{
+							"item": "Batchoy",
+							"description": "Noodle soup topped with pork innards and crushed chicharon.",
+							"price": "95.00"
+					},
+					{
+							"item": "Pinangat",
+							"description": "Taro leaves wrapped and stuffed with fish or meat, cooked in coconut milk.",
+							"price": "115.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "42",
+			"image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+			"name": "Laing sa Daet",
+			"description": "Serving authentic Bicolano flavors, famous for our Pinangat. A must-try whenever you're in Daet!",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Bibirao",
+					"purok": "5",
+					"street": "J. Lukban Street"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Pinangat",
+							"description": "Taro leaves wrapped and stuffed with fish or meat, cooked in coconut milk.",
+							"price": "105.00"
+					},
+					{
+							"item": "Chicken Adobo",
+							"description": "Bicol-style chicken adobo.",
+							"price": "60.00"
+					},
+					{
+							"item": "Bibingka",
+							"description": "Baked rice cake topped with cheese and salted egg.",
+							"price": "45.00"
+					},
+					{
+							"item": "Batchoy",
+							"description": "Noodle soup topped with pork innards and crushed chicharon.",
+							"price": "85.00"
+					},
+					{
+							"item": "Grilled Liempo",
+							"description": "Charcoal-grilled marinated pork belly.",
+							"price": "140.00"
+					},
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+							"alt_text": "Inside the dining area."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "43",
+			"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+			"name": "Pinangat Kusina",
+			"description": "A favorite hangout near Daet Fire Station, known for generous servings of Pancit Bihon.",
+			"nearestLandmark": "Daet Fire Station",
+			"address": {
+					"barangay": "Barangay I (Poblacion)",
+					"purok": "1",
+					"street": "Alfelor Street"
+			},
+			"minPrice": 30,
+			"menu": [
+					{
+							"item": "Pancit Bihon",
+							"description": "Stir-fried rice noodles with vegetables and meat.",
+							"price": "85.00"
+					},
+					{
+							"item": "Kare-Kare",
+							"description": "Oxtail and vegetables in a rich peanut sauce.",
+							"price": "235.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "30.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Dessert",
+							"description": "Sweet treats and snacks enjoyed after a meal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800",
+							"alt_text": "Customers enjoying their meal."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+							"alt_text": "The place's signage."
+					}
+			]
+	},
+	{
+			"id": "44",
+			"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+			"name": "Bicol Sili Express",
+			"description": "A cozy little spot in Daet serving up Afritada the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "Mercury Drug Vinzons Avenue",
+			"address": {
+					"barangay": "Cobangbang",
+					"purok": "8",
+					"street": "Maharlika Highway"
+			},
+			"minPrice": 35,
+			"menu": [
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "150.00"
+					},
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "35.00"
+					},
+					{
+							"item": "Pancit Malabon",
+							"description": "Thick rice noodles in a savory seafood sauce.",
+							"price": "115.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Adobo",
+							"description": "Filipino-style cooking for any meat that are submerged in soy sauce and vinegar."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "45",
+			"image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800",
+			"name": "Coco Sili Grill",
+			"description": "A favorite hangout near Vinzons Park (Freedom Park), known for generous servings of Batchoy.",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "Cobangbang",
+					"purok": "3",
+					"street": "Pili Drive"
+			},
+			"minPrice": 70,
+			"menu": [
+					{
+							"item": "Batchoy",
+							"description": "Noodle soup topped with pork innards and crushed chicharon.",
+							"price": "85.00"
+					},
+					{
+							"item": "Crispy Pata",
+							"description": "Deep-fried pork leg, crispy on the outside, tender inside.",
+							"price": "300.00"
+					},
+					{
+							"item": "Tinolang Manok",
+							"description": "Chicken soup with ginger, green papaya, and chili leaves.",
+							"price": "145.00"
+					},
+					{
+							"item": "Fried Chicken Skin",
+							"description": "Crispy deep-fried chicken skin, a popular pulutan.",
+							"price": "100.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "70.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "155.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Grilled",
+							"description": "Meat or seafood cooked directly over hot coals or open flame."
+					},
+					{
+							"name": "Seafood",
+							"description": "Fresh catch from the sea prepared in various Filipino styles."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	},
+	{
+			"id": "46",
+			"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+			"name": "Camarines Halo-Halo",
+			"description": "Bringing the true taste of Bicol to your table, one order of Sisig at a time.",
+			"nearestLandmark": "University of Camarines Norte",
+			"address": {
+					"barangay": "Magang",
+					"purok": "2",
+					"street": "Bagasbas Road"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "165.00"
+					},
+					{
+							"item": "Lechon Kawali",
+							"description": "Deep-fried pork belly, crispy and golden.",
+							"price": "190.00"
+					},
+					{
+							"item": "Lugaw",
+							"description": "Filipino rice porridge, simple and comforting.",
+							"price": "45.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Dessert",
+							"description": "Sweet treats and snacks enjoyed after a meal."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "47",
+			"image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+			"name": "Bagasbas Grill & Chill",
+			"description": "A cozy little spot in Daet serving up Kinilaw na Tanigue the way your lola used to make it. Perfect for a hearty meal with family and friends!",
+			"nearestLandmark": "Bagasbas Beach",
+			"address": {
+					"barangay": "Bagasbas",
+					"purok": "3",
+					"street": "Daet-Basud Road"
+			},
+			"minPrice": 45,
+			"menu": [
+					{
+							"item": "Kinilaw na Tanigue",
+							"description": "Spanish mackerel cured in vinegar and calamansi, Filipino ceviche.",
+							"price": "180.00"
+					},
+					{
+							"item": "Arroz Caldo",
+							"description": "Ginger rice porridge topped with chicken and toasted garlic.",
+							"price": "45.00"
+					},
+					{
+							"item": "Halo-Halo",
+							"description": "Shaved ice mixed with sweet beans, fruits, and topped with leche flan.",
+							"price": "65.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "48",
+			"image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800",
+			"name": "Daet Milk Tea & Snacks",
+			"description": "Simple, affordable, and delicious — our Chicharon Bulaklak is a Daet staple loved by students and families alike.",
+			"nearestLandmark": "Daet Public Market",
+			"address": {
+					"barangay": "Barangay II (Poblacion)",
+					"purok": "8",
+					"street": "Camambugan Road"
+			},
+			"minPrice": 50,
+			"menu": [
+					{
+							"item": "Chicharon Bulaklak",
+							"description": "Deep-fried pork mesentery, crispy Filipino snack.",
+							"price": "115.00"
+					},
+					{
+							"item": "Taro Ice Cream",
+							"description": "Creamy purple yam flavored ice cream.",
+							"price": "70.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "65.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "80.00"
+					},
+					{
+							"item": "Dinuguan",
+							"description": "Pork blood stew simmered with vinegar and chili.",
+							"price": "95.00"
+					},
+					{
+							"item": "Puto Bumbong",
+							"description": "Purple rice cake steamed in bamboo tubes.",
+							"price": "50.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Rice Meals",
+							"description": "Hearty combos of rice paired with a savory viand."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					},
+					{
+							"name": "Soup",
+							"description": "Any meat or vegetables that are cooked as a broth."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+							"alt_text": "Customers enjoying their meal."
+					}
+			]
+	},
+	{
+			"id": "49",
+			"image": "https://images.unsplash.com/photo-1585238341267-5c2b0be0d0ec?w=800",
+			"name": "Puto Bumbong Corner",
+			"description": "From sizzling plates to comforting bowls, our Kilawin Kambing keeps locals and tourists coming back for more.",
+			"nearestLandmark": "Vinzons Park (Freedom Park)",
+			"address": {
+					"barangay": "San Isidro",
+					"purok": "6",
+					"street": "F. Pimentel Street"
+			},
+			"minPrice": 25,
+			"menu": [
+					{
+							"item": "Kilawin Kambing",
+							"description": "Goat meat cooked in vinegar and spices.",
+							"price": "150.00"
+					},
+					{
+							"item": "Bangus sa Gata",
+							"description": "Milkfish simmered in coconut milk.",
+							"price": "160.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "25.00"
+					},
+					{
+							"item": "Crispy Pata",
+							"description": "Deep-fried pork leg, crispy on the outside, tender inside.",
+							"price": "290.00"
+					},
+					{
+							"item": "Adobong Pusit",
+							"description": "Squid cooked adobo-style in its own ink.",
+							"price": "140.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Street Food",
+							"description": "Quick, affordable snacks and dishes sold along the roadside."
+					},
+					{
+							"name": "Fried Food",
+							"description": "Fried foods are foods that are cooked in oil."
+					},
+					{
+							"name": "Barbecue",
+							"description": "Skewered meats marinated and grilled over charcoal."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1512490150004-7c53f8be3bb0?w=800",
+							"alt_text": "The place's signage."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800",
+							"alt_text": "Inside the dining area."
+					}
+			]
+	},
+	{
+			"id": "50",
+			"image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+			"name": "Lugaw Lovers",
+			"description": "A favorite hangout near Camarines Norte Capitol, known for generous servings of Pili Nut Tart.",
+			"nearestLandmark": "Camarines Norte Capitol",
+			"address": {
+					"barangay": "Borabod",
+					"purok": "1",
+					"street": "F. Pimentel Street"
+			},
+			"minPrice": 15,
+			"menu": [
+					{
+							"item": "Pili Nut Tart",
+							"description": "Sweet pastry filled with Bicol's famous pili nuts.",
+							"price": "40.00"
+					},
+					{
+							"item": "Taba ng Talangka Rice",
+							"description": "Crab fat sauteed rice, a Bicolano favorite.",
+							"price": "80.00"
+					},
+					{
+							"item": "Sisig",
+							"description": "Sizzling chopped pork face and liver seasoned with calamansi and chili.",
+							"price": "145.00"
+					},
+					{
+							"item": "Afritada",
+							"description": "Chicken or pork stewed with potatoes and bell peppers in tomato sauce.",
+							"price": "150.00"
+					},
+					{
+							"item": "Lomi",
+							"description": "Thick egg noodle soup with pork and vegetables.",
+							"price": "75.00"
+					},
+					{
+							"item": "Turon",
+							"description": "Fried banana rolls coated in caramelized sugar.",
+							"price": "15.00"
+					}
+			],
+			"food_types": [
+					{
+							"name": "Spicy",
+							"description": "Dishes with a fiery kick of chili."
+					},
+					{
+							"name": "Coconut-based",
+							"description": "Dishes cooked with rich, creamy coconut milk."
+					}
+			],
+			"listing_img": [
+					{
+							"image": "https://images.unsplash.com/photo-1467453678174-768ec283a940?w=800",
+							"alt_text": "Food place's front."
+					},
+					{
+							"image": "https://images.unsplash.com/photo-1580217593608-61931cefc821?w=800",
+							"alt_text": "A closer look at the food."
+					}
+			]
+	}
+]
