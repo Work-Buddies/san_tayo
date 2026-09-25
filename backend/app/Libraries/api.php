@@ -184,8 +184,9 @@ class api
       return [
         'landmark.barangay',
         'listing_status',
+        'account',
         'images_with_trashed',
-        'menu_items_with_trashed',
+        'menu_groups_with_trashed.items_with_trashed',
         'food_types_with_trashed.food_type',
       ];
     }
@@ -193,8 +194,9 @@ class api
     return [
       'landmark.barangay',
       'listing_status',
+      'account',
       'images',
-      'menu_items',
+      'menu_groups.items',
       'food_types.food_type',
     ];
   }
@@ -206,7 +208,8 @@ class api
     }
 
     $images_key     = $include_trashed ? 'images_with_trashed' : 'images';
-    $menu_key       = $include_trashed ? 'menu_items_with_trashed' : 'menu_items';
+    $groups_key     = $include_trashed ? 'menu_groups_with_trashed' : 'menu_groups';
+    $items_key      = $include_trashed ? 'items_with_trashed' : 'items';
     $food_types_key = $include_trashed ? 'food_types_with_trashed' : 'food_types';
 
     $images = [];
@@ -219,14 +222,25 @@ class api
       ];
     }
 
-    $menu_items = [];
-    foreach ($listing->{$menu_key} ?? [] as $menu) {
-      $menu_items[] = [
-        'id'          => $menu->id,
-        'item'        => $menu->item,
-        'price'       => $menu->price,
-        'description' => $menu->description,
-        'deleted_at'  => $menu->deleted_at,
+    $menu_groups = [];
+    foreach ($listing->{$groups_key} ?? [] as $group) {
+      $items = [];
+      foreach ($group->{$items_key} ?? [] as $menu) {
+        $items[] = [
+          'id'           => $menu->id,
+          'item'         => $menu->item,
+          'price'        => $menu->price,
+          'description'  => $menu->description,
+          'image_base64' => empty($menu->image) ? null : base64_encode($menu->image),
+          'deleted_at'   => $menu->deleted_at,
+        ];
+      }
+
+      $menu_groups[] = [
+        'id'         => $group->id,
+        'group_name' => $group->group_name,
+        'deleted_at' => $group->deleted_at,
+        'items'      => $items,
       ];
     }
 
@@ -258,8 +272,10 @@ class api
       'address_street'  => $listing->address_street,
       'address_purok'   => $listing->address_purok,
       'active'          => $listing->active,
+      'banner_base64'   => empty($listing->banner_img) ? null : base64_encode($listing->banner_img),
+      'logo_base64'     => empty($listing->account?->image) ? null : base64_encode($listing->account->image),
       'images'          => $images,
-      'menu_items'      => $menu_items,
+      'menu_groups'     => $menu_groups,
       'food_types'      => $food_types,
     ];
   }

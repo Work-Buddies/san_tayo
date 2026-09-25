@@ -1,9 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 
+/// Network URL or base64 (raw or data-URL). Null when there is no photo.
+ImageProvider? image_provider_from(dynamic value) {
+  final raw = value?.toString().trim() ?? '';
+  if (raw.isEmpty || raw == 'null') {
+    return null;
+  }
+  if (raw.startsWith('http://') || raw.startsWith('https://')) {
+    return NetworkImage(raw);
+  }
+
+  final payload = raw.contains(',') ? raw.split(',').last : raw;
+  try {
+    return MemoryImage(base64Decode(payload));
+  } catch (_) {
+    return null;
+  }
+}
+
 /// Food-place card: photo, name, nearest landmark, starting price, and tags.
 class ListingCard extends StatelessWidget {
-  final ImageProvider image;
+  final ImageProvider? image;
   final String name;
   final String nearestLandmark;
   final num minPrice;
@@ -12,7 +32,7 @@ class ListingCard extends StatelessWidget {
 
   const ListingCard({
     super.key,
-    required this.image,
+    this.image,
     required this.name,
     required this.nearestLandmark,
     required this.minPrice,
@@ -38,7 +58,9 @@ class ListingCard extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 16 / 10,
-              child: Image(image: image, fit: BoxFit.cover, width: double.infinity),
+              child: image == null
+                  ? const ColoredBox(color: Color(0xFF4A4A4A))
+                  : Image(image: image!, fit: BoxFit.cover, width: double.infinity),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),

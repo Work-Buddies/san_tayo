@@ -21,11 +21,9 @@ class _WebSkeletonState extends State<WebSkeleton> {
     });
   }
 
-  /**
-   * @uses: Checks login state and routes to the matching web screen.
-   * @author: Kai Yaneza
-   * Date: 2026-09-11
-   */
+  /// @uses: Checks login state and routes to the matching web screen.
+  /// @author: Kai Yaneza
+  /// Date: 2026-09-11
   Future<void> _app_preload() async {
     final started_at = DateTime.now();
 

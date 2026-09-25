@@ -26,6 +26,10 @@ class ListingModel extends Model
     'active',
   ];
 
+  protected $hidden = [
+    'banner_img',
+  ];
+
   protected $casts = [
     'active' => 'boolean',
   ];
@@ -50,9 +54,9 @@ class ListingModel extends Model
     return $this->hasMany(ListingImgModel::class, 'listing_id')->whereNull('deleted_at');
   }
 
-  public function menu_items()
+  public function menu_groups()
   {
-    return $this->hasMany(ListingMenuModel::class, 'listing_id')->whereNull('deleted_at');
+    return $this->hasMany(ListingMenuGroupModel::class, 'listing_id')->whereNull('deleted_at');
   }
 
   public function food_types()
@@ -65,9 +69,9 @@ class ListingModel extends Model
     return $this->hasMany(ListingImgModel::class, 'listing_id');
   }
 
-  public function menu_items_with_trashed()
+  public function menu_groups_with_trashed()
   {
-    return $this->hasMany(ListingMenuModel::class, 'listing_id');
+    return $this->hasMany(ListingMenuGroupModel::class, 'listing_id');
   }
 
   public function food_types_with_trashed()

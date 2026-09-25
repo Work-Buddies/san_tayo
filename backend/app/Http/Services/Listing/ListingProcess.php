@@ -10,6 +10,7 @@ use App\Models\Auth\AuthLevelModel;
 use App\Models\Listing\ListingModel;
 use App\Models\Listing\ListingImgModel;
 use App\Models\Listing\ListingMenuModel;
+use App\Models\Listing\ListingMenuGroupModel;
 use App\Models\Listing\ListingFoodTypeModel;
 use App\Models\Listing\ListingStatusModel;
 use App\Models\Location\LandmarkModel;
@@ -134,11 +135,16 @@ class ListingProcess
       return $rs;
     }
 
+    $banner = $this->decode_image($params['banner_base64'] ?? null, true);
+    if ($banner['code'] != 1) {
+      return $banner;
+    }
+
     try {
       DB::beginTransaction();
 
       $listing_id = Str::uuid()->toString();
-      ListingModel::create([
+      $listing = ListingModel::create([
         'id'                => $listing_id,
         'account_id'        => $account->id,
         'landmark_id'       => $params['landmark_id'],
@@ -149,6 +155,11 @@ class ListingProcess
         'address_purok'     => $params['address_purok'],
         'active'            => true,
       ]);
+
+      if (array_key_exists('banner_base64', $params)) {
+        $listing->banner_img = $banner['data'];
+        $listing->save();
+      }
 
       $this->save_children($listing_id, $params);
 
@@ -199,6 +210,14 @@ class ListingProcess
       if (array_key_exists($field, $params)) {
         $listing->{$field} = $params[$field];
       }
+    }
+
+    if (array_key_exists('banner_base64', $params)) {
+      $banner = $this->decode_image($params['banner_base64'], true);
+      if ($banner['code'] != 1) {
+        return $banner;
+      }
+      $listing->banner_img = $banner['data'];
     }
 
     $listing->save();
@@ -398,12 +417,25 @@ class ListingProcess
       return $validation;
     }
 
-    ListingMenuModel::create([
-      'listing_id'  => $listing_id,
-      'item'        => $params['item'],
-      'price'       => $params['price'],
-      'description' => $params['description'] ?? null,
-    ]);
+    $group = $this->menu_group_for_listing($listing_id, $params);
+    if ($group['code'] != 1) {
+      return $group;
+    }
+
+    $image = $this->decode_image($params['image_base64'] ?? null, true);
+    if ($image['code'] != 1) {
+      return $image;
+    }
+
+    $menu = new ListingMenuModel();
+    $menu->listing_menu_group_id = $group['data']->id;
+    $menu->item                  = $params['item'];
+    $menu->price                 = $params['price'];
+    $menu->description           = $params['description'] ?? null;
+    if (array_key_exists('image_base64', $params)) {
+      $menu->image = $image['data'];
+    }
+    $menu->save();
 
     $listing = api::get_listing_with_children($listing_id, true);
     $rs = SharedFunction::api_success('Menu item added.', api::format_listing($listing, true));
@@ -424,7 +456,7 @@ class ListingProcess
       return $rs;
     }
 
-    $menu = ListingMenuModel::where('id', $menu_id)->where('listing_id', $listing_id)->first();
+    $menu = $this->menu_on_listing($listing_id, $menu_id);
     if (empty($menu)) {
       $rs['msg'] = 'Menu item not found.';
       return $rs;
@@ -449,6 +481,24 @@ class ListingProcess
     if (array_key_exists('description', $params)) {
       $menu->description = $params['description'];
     }
+    if (array_key_exists('image_base64', $params)) {
+      $image = $this->decode_image($params['image_base64'], true);
+      if ($image['code'] != 1) {
+        return $image;
+      }
+      $menu->image = $image['data'];
+    }
+    if (!empty($params['listing_menu_group_id'])) {
+      $group = ListingMenuGroupModel::where('id', $params['listing_menu_group_id'])
+        ->where('listing_id', $listing_id)
+        ->whereNull('deleted_at')
+        ->first();
+      if (empty($group)) {
+        $rs['msg'] = 'Menu group not found.';
+        return $rs;
+      }
+      $menu->listing_menu_group_id = $group->id;
+    }
 
     $menu->save();
 
@@ -464,7 +514,7 @@ class ListingProcess
    */
   public function destroy_menu($account, $listing_id, $menu_id)
   {
-    return $this->soft_delete_child($account, $listing_id, $menu_id, ListingMenuModel::class, 'Menu item');
+    return $this->set_menu_deleted($account, $listing_id, $menu_id, true);
   }
 
   /**
@@ -474,7 +524,7 @@ class ListingProcess
    */
   public function restore_menu($account, $listing_id, $menu_id)
   {
-    return $this->restore_child($account, $listing_id, $menu_id, ListingMenuModel::class, 'Menu item');
+    return $this->set_menu_deleted($account, $listing_id, $menu_id, false);
   }
 
   /**
@@ -608,18 +658,15 @@ class ListingProcess
       }
     }
 
-    if (!empty($params['menu_items']) && is_array($params['menu_items'])) {
-      foreach ($params['menu_items'] as $menu_params) {
-        $validation = SharedFunction::validate_menu_item($menu_params);
-        if ($validation['code'] == 1) {
-          ListingMenuModel::create([
-            'listing_id'  => $listing_id,
-            'item'        => $menu_params['item'],
-            'price'       => $menu_params['price'],
-            'description' => $menu_params['description'] ?? null,
-          ]);
-        }
+    if (!empty($params['menu_groups']) && is_array($params['menu_groups'])) {
+      foreach ($params['menu_groups'] as $group_params) {
+        $this->store_group_with_items($listing_id, $group_params);
       }
+    } elseif (!empty($params['menu_items']) && is_array($params['menu_items'])) {
+      $this->store_group_with_items($listing_id, [
+        'group_name' => 'Menu',
+        'items'       => $params['menu_items'],
+      ]);
     }
 
     if (!empty($params['food_type_ids']) && is_array($params['food_type_ids'])) {
@@ -768,6 +815,170 @@ class ListingProcess
 
     $listing = api::get_listing_with_children($listing_id, true);
     $rs = SharedFunction::api_success("{$label} restored.", api::format_listing($listing, true));
+    return $rs;
+  }
+
+  /**
+   * @uses: Decode a base64 image. Empty is allowed when $allow_empty is true.
+   * @author: Kai Yaneza
+   * Date: 2026-09-25
+   */
+  private function decode_image($value, $allow_empty = false)
+  {
+    $rs = ['code' => 0, 'title' => 'Ooops!', 'msg' => 'Something went wrong.'];
+
+    if ($value === null || $value === '') {
+      if ($allow_empty) {
+        $rs = ['code' => 1, 'title' => 'Success!', 'msg' => 'No image.', 'data' => null];
+        return $rs;
+      }
+      $rs['msg'] = 'Invalid image data.';
+      return $rs;
+    }
+
+    $binary = base64_decode($value, true);
+    if ($binary === false) {
+      $rs['msg'] = 'Invalid image data.';
+      return $rs;
+    }
+
+    $rs = ['code' => 1, 'title' => 'Success!', 'msg' => 'Image decoded.', 'data' => $binary];
+    return $rs;
+  }
+
+  /**
+   * @uses: Find a menu row through its group, since items no longer store listing_id
+   * @author: Kai Yaneza
+   * Date: 2026-09-25
+   */
+  private function menu_on_listing($listing_id, $menu_id)
+  {
+    return ListingMenuModel::where('id', $menu_id)
+      ->whereHas('group', function ($query) use ($listing_id) {
+        $query->where('listing_id', $listing_id);
+      })
+      ->first();
+  }
+
+  /**
+   * @uses: Resolve the group for a new menu item from an id or a group name
+   * @author: Kai Yaneza
+   * Date: 2026-09-25
+   */
+  private function menu_group_for_listing($listing_id, $params)
+  {
+    $rs = ['code' => 0, 'title' => 'Ooops!', 'msg' => 'Something went wrong.'];
+
+    if (!empty($params['listing_menu_group_id'])) {
+      $group = ListingMenuGroupModel::where('id', $params['listing_menu_group_id'])
+        ->where('listing_id', $listing_id)
+        ->whereNull('deleted_at')
+        ->first();
+      if (empty($group)) {
+        $rs['msg'] = 'Menu group not found.';
+        return $rs;
+      }
+      $rs = ['code' => 1, 'title' => 'Success!', 'msg' => 'Menu group found.', 'data' => $group];
+      return $rs;
+    }
+
+    $name = trim($params['group_name'] ?? '');
+    if ($name === '') {
+      $rs['msg'] = 'Menu group is required.';
+      return $rs;
+    }
+
+    $group = ListingMenuGroupModel::where('listing_id', $listing_id)
+      ->where('group_name', $name)
+      ->whereNull('deleted_at')
+      ->first();
+    if (empty($group)) {
+      $group = ListingMenuGroupModel::create([
+        'listing_id' => $listing_id,
+        'group_name' => $name,
+      ]);
+    }
+
+    $rs = ['code' => 1, 'title' => 'Success!', 'msg' => 'Menu group ready.', 'data' => $group];
+    return $rs;
+  }
+
+  /**
+   * @uses: Insert a menu group and its items while creating a listing
+   * @author: Kai Yaneza
+   * Date: 2026-09-25
+   */
+  private function store_group_with_items($listing_id, $params)
+  {
+    $rs = ['code' => 0, 'title' => 'Ooops!', 'msg' => 'Something went wrong.'];
+
+    $name = trim($params['group_name'] ?? '');
+    if ($name === '') {
+      $rs['msg'] = 'Menu group name is required.';
+      return $rs;
+    }
+
+    $group = ListingMenuGroupModel::create([
+      'listing_id' => $listing_id,
+      'group_name' => $name,
+    ]);
+
+    $items = $params['items'] ?? [];
+    if (!is_array($items)) {
+      $rs['msg'] = 'Menu items must be a list.';
+      return $rs;
+    }
+
+    foreach ($items as $menu_params) {
+      $validation = SharedFunction::validate_menu_item($menu_params);
+      if ($validation['code'] != 1) {
+        continue;
+      }
+
+      $menu = new ListingMenuModel();
+      $menu->listing_menu_group_id = $group->id;
+      $menu->item                  = $menu_params['item'];
+      $menu->price                 = $menu_params['price'];
+      $menu->description           = $menu_params['description'] ?? null;
+      if (!empty($menu_params['image_base64'])) {
+        $image = $this->decode_image($menu_params['image_base64'], true);
+        if ($image['code'] == 1) {
+          $menu->image = $image['data'];
+        }
+      }
+      $menu->save();
+    }
+
+    $rs = ['code' => 1, 'title' => 'Success!', 'msg' => 'Menu group saved.', 'data' => $group];
+    return $rs;
+  }
+
+  /**
+   * @uses: Soft-delete or restore a menu item that belongs to this listing
+   * @author: Kai Yaneza
+   * Date: 2026-09-25
+   */
+  private function set_menu_deleted($account, $listing_id, $menu_id, $deleted)
+  {
+    $rs = ['code' => 0, 'title' => 'Ooops!', 'msg' => 'Something went wrong.'];
+
+    if (!$this->can_manage_listing($account, $listing_id)) {
+      $rs['msg'] = 'You are not allowed to manage this listing.';
+      return $rs;
+    }
+
+    $menu = $this->menu_on_listing($listing_id, $menu_id);
+    if (empty($menu)) {
+      $rs['msg'] = 'Menu item not found.';
+      return $rs;
+    }
+
+    $menu->deleted_at = $deleted ? now() : null;
+    $menu->save();
+
+    $listing = api::get_listing_with_children($listing_id, true);
+    $msg = $deleted ? 'Menu item deleted.' : 'Menu item restored.';
+    $rs = SharedFunction::api_success($msg, api::format_listing($listing, true));
     return $rs;
   }
 }

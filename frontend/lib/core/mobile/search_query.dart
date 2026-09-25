@@ -1,3 +1,6 @@
+/// Which filter shortcut is open. A null section on the results pop means every accordion.
+enum SearchFilterSection { saan, ano, magkano, ilan }
+
 /// Filters collected on the search overlay and applied on the results screen.
 class SearchQuery {
   final String text;
@@ -22,6 +25,24 @@ class SearchQuery {
     }
     return 'Results';
   }
+
+  int get saan_count {
+    final name = landmark_name?.trim() ?? '';
+    return name.isEmpty ? 0 : 1;
+  }
+
+  int get ano_count => food_types.length;
+
+  int get magkano_count {
+    if (min_price != null || max_price != null) {
+      return 1;
+    }
+    return 0;
+  }
+
+  int get ilan_count => party_size == null ? 0 : 1;
+
+  int get settings_count => saan_count + ano_count + magkano_count + ilan_count;
 }
 
 /// Map the Magkano chip / custom fields to an inclusive min–max.
@@ -115,6 +136,25 @@ String _listing_haystack(Map<String, dynamic> listing) {
     for (final item in menu) {
       if (item is Map) {
         parts.add(item['item']?.toString() ?? '');
+      }
+    }
+  }
+
+  final groups = listing['menu_groups'];
+  if (groups is List) {
+    for (final group in groups) {
+      if (group is! Map) {
+        continue;
+      }
+      parts.add(group['group_name']?.toString() ?? '');
+      final items = group['items'];
+      if (items is! List) {
+        continue;
+      }
+      for (final item in items) {
+        if (item is Map) {
+          parts.add(item['item']?.toString() ?? '');
+        }
       }
     }
   }

@@ -16,7 +16,69 @@ import 'package:san_tayo/core/network/api_client.dart';
 Future<List<Map<String, dynamic>>> get_listings() async {
   final raw  = await rootBundle.loadString('assets/data/mock-listing-data.json');
   final list = jsonDecode(raw) as List<dynamic>;
-  return list.cast<Map<String, dynamic>>();
+  return list
+      .whereType<Map>()
+      .map((row) => normalize_listing(Map<String, dynamic>.from(row)))
+      .toList();
+}
+
+/// One shape for cards and the listing page. Banner is never the account logo.
+Map<String, dynamic> normalize_listing(Map<String, dynamic> raw) {
+  final next = Map<String, dynamic>.from(raw);
+
+  next['name'] = raw['name'] ?? raw['title'] ?? '';
+  next['banner'] = raw['banner'] ?? raw['banner_base64'] ?? raw['image'];
+  next['logo'] = raw['logo'] ?? raw['logo_base64'];
+
+  final landmark = raw['landmark'];
+  next['nearestLandmark'] = raw['nearestLandmark']
+      ?? (landmark is Map ? landmark['name'] : null)
+      ?? '';
+
+  if (next['menu_groups'] is! List) {
+    final flat = raw['menu'] ?? raw['menu_items'];
+    next['menu_groups'] = flat is List
+        ? [
+            {'group_name': 'Menu', 'items': flat},
+          ]
+        : <Map<String, dynamic>>[];
+  }
+
+  next['gallery'] = raw['gallery'] ?? raw['listing_img'] ?? raw['images'] ?? <dynamic>[];
+  next['minPrice'] = raw['minPrice'] ?? _min_menu_price(next['menu_groups']);
+  return next;
+}
+
+num _min_menu_price(dynamic groups) {
+  num? lowest;
+  if (groups is! List) {
+    return 0;
+  }
+
+  for (final group in groups) {
+    if (group is! Map) {
+      continue;
+    }
+    final items = group['items'];
+    if (items is! List) {
+      continue;
+    }
+    for (final item in items) {
+      if (item is! Map) {
+        continue;
+      }
+      final price = item['price'];
+      final value = price is num ? price : num.tryParse(price?.toString() ?? '');
+      if (value == null) {
+        continue;
+      }
+      if (lowest == null || value < lowest) {
+        lowest = value;
+      }
+    }
+  }
+
+  return lowest ?? 0;
 }
 
 class Dashboard extends StatefulWidget {
@@ -142,10 +204,10 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  void _open_listing(String listingId) {
+  void _open_listing(Map<String, dynamic> listing) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => ListingView(listingId: listingId),
+        builder: (_) => ListingView(listing: listing),
       ),
     );
   }
@@ -160,12 +222,12 @@ class _DashboardState extends State<Dashboard> {
 
   ListingCard _listing_card(Map<String, dynamic> listing) {
     return ListingCard(
-      image: NetworkImage(listing['image'].toString()),
+      image: image_provider_from(listing['banner']),
       name: listing['name'].toString(),
       nearestLandmark: listing['nearestLandmark'].toString(),
       minPrice: listing['minPrice'] as num,
       tags: _tags_of(listing),
-      onTap: () => _open_listing(listing['id'].toString()),
+      onTap: () => _open_listing(listing),
     );
   }
 

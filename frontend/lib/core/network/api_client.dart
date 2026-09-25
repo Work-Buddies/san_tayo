@@ -32,27 +32,27 @@ Future<ApiResponse> api_request(
       case 'GET':
         response = await http
             .get(uri, headers: headers)
-            .timeout(Duration(seconds: ApiConfig.timeout_seconds));
+            .timeout(const Duration(seconds: ApiConfig.timeout_seconds));
         break;
       case 'POST':
         response = await http
             .post(uri, headers: headers, body: jsonEncode(body ?? {}))
-            .timeout(Duration(seconds: ApiConfig.timeout_seconds));
+            .timeout(const Duration(seconds: ApiConfig.timeout_seconds));
         break;
       case 'PUT':
         response = await http
             .put(uri, headers: headers, body: jsonEncode(body ?? {}))
-            .timeout(Duration(seconds: ApiConfig.timeout_seconds));
+            .timeout(const Duration(seconds: ApiConfig.timeout_seconds));
         break;
       case 'PATCH':
         response = await http
             .patch(uri, headers: headers, body: jsonEncode(body ?? {}))
-            .timeout(Duration(seconds: ApiConfig.timeout_seconds));
+            .timeout(const Duration(seconds: ApiConfig.timeout_seconds));
         break;
       case 'DELETE':
         response = await http
             .delete(uri, headers: headers, body: body != null ? jsonEncode(body) : null)
-            .timeout(Duration(seconds: ApiConfig.timeout_seconds));
+            .timeout(const Duration(seconds: ApiConfig.timeout_seconds));
         break;
       default:
         return ApiResponse.error('Unsupported HTTP method: $method');

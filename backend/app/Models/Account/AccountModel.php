@@ -26,6 +26,7 @@ class AccountModel extends Authenticatable
 
   protected $hidden = [
     'password_hash',
+    'image',
   ];
 
   public function auth_level()

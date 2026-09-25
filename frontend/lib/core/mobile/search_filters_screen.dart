@@ -38,8 +38,6 @@ const List<({String label, int size})> _party_presets = [
 
 const int _party_size_max = 20;
 
-enum SearchFilterSection { saan, ano, magkano, ilan }
-
 /// Full-screen search + filter overlay opened from the dashboard search bar.
 class SearchFiltersScreen extends StatefulWidget {
   final List<Map<String, dynamic>> landmarks;
@@ -103,23 +101,23 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
     if (!mounted) {
       return;
     }
-    _open_results(value);
+    await _open_results(value);
   }
 
-  void _open_results(String value) {
+  Future<void> _open_results(String value) async {
     final budget = parse_budget_range(
       _budget,
       _budget_from_controller.text,
       _budget_to_controller.text,
     );
 
-    Navigator.of(context).push(
+    final popped = await Navigator.of(context).push<ResultsPop>(
       MaterialPageRoute(
         builder: (_) => SearchResultsScreen(
           listings: widget.listings,
           query: SearchQuery(
             text: value,
-            landmark_name: _landmark_name,
+            landmark_name: _query_landmark_name,
             food_types: _food_types.toList(),
             min_price: budget.min,
             max_price: budget.max,
@@ -128,6 +126,18 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
         ),
       ),
     );
+
+    if (!mounted || popped == null) {
+      return;
+    }
+
+    _search_controller.value = TextEditingValue(
+      text: popped.text,
+      selection: TextSelection.collapsed(offset: popped.text.length),
+    );
+    if (popped.show_filters) {
+      _select_shortcut(popped.section);
+    }
   }
 
   Future<void> _clear_recents() async {
@@ -189,6 +199,10 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
   }
 
   bool _is_landmark_selected(Map<String, dynamic> landmark) {
+    if (_query_landmark_name == null) {
+      return false;
+    }
+
     final selected_id = _filter_landmark['id']?.toString();
     if (selected_id != null && landmark['id'] != null) {
       return landmark['id'].toString() == selected_id;
@@ -196,13 +210,18 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
     return landmark['name']?.toString() == _filter_landmark['name']?.toString();
   }
 
-  String get _landmark_name {
-    return _filter_landmark['name']?.toString() ?? default_landmark_name;
+  /// Null means Anywhere: no landmark is sent to the results query.
+  String? get _query_landmark_name {
+    final name = _filter_landmark['name']?.toString().trim() ?? '';
+    if (name.isEmpty) {
+      return null;
+    }
+    return name;
   }
 
-  int get _saan_count {
-    return _landmark_name.trim().isEmpty ? 0 : 1;
-  }
+  String get _saan_label => _query_landmark_name ?? 'Anywhere';
+
+  int get _saan_count => _query_landmark_name == null ? 0 : 1;
 
   int get _ano_count => _food_types.length;
 
@@ -277,15 +296,23 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
                     icon: HeroIcons.mapPin,
                     title: 'Saan',
                     subtitle: "Filter the place where you're near.",
-                    trailing: _landmark_name,
+                    trailing: _saan_label,
                     expanded: _is_expanded(SearchFilterSection.saan),
                     onToggle: () => _toggle_section(SearchFilterSection.saan),
                     child: SaanFilterBody(
                       controller: _landmark_controller,
                       landmarks: _filtered_landmarks,
+                      anywhereSelected: _query_landmark_name == null,
                       isSelected: _is_landmark_selected,
                       onQueryChanged: (value) => setState(() => _landmark_query = value),
-                      onPick: (landmark) => setState(() => _filter_landmark = landmark),
+                      onAnywhere: () => setState(() => _filter_landmark = {}),
+                      onPick: (landmark) => setState(() {
+                        if (_is_landmark_selected(landmark)) {
+                          _filter_landmark = {};
+                        } else {
+                          _filter_landmark = landmark;
+                        }
+                      }),
                     ),
                   ),
                   if (_shows(SearchFilterSection.ano) ||
@@ -863,16 +890,20 @@ class FilterAccordion extends StatelessWidget {
 class SaanFilterBody extends StatelessWidget {
   final TextEditingController controller;
   final List<Map<String, dynamic>> landmarks;
+  final bool anywhereSelected;
   final bool Function(Map<String, dynamic> landmark) isSelected;
   final ValueChanged<String> onQueryChanged;
+  final VoidCallback onAnywhere;
   final ValueChanged<Map<String, dynamic>> onPick;
 
   const SaanFilterBody({
     super.key,
     required this.controller,
     required this.landmarks,
+    required this.anywhereSelected,
     required this.isSelected,
     required this.onQueryChanged,
+    required this.onAnywhere,
     required this.onPick,
   });
 
@@ -913,6 +944,10 @@ class SaanFilterBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
+        AnywherePickRow(
+          selected: anywhereSelected,
+          onTap: onAnywhere,
+        ),
         if (landmarks.isEmpty)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
@@ -931,6 +966,59 @@ class SaanFilterBody extends StatelessWidget {
               onTap: () => onPick(landmark),
             ),
       ],
+    );
+  }
+}
+
+/// Clears Saan. Stays at the top of the list while the landmark search is active.
+class AnywherePickRow extends StatelessWidget {
+  final bool selected;
+  final VoidCallback onTap;
+
+  const AnywherePickRow({
+    super.key,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme   = Theme.of(context).textTheme;
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.08)),
+          ),
+        ),
+        child: Row(
+          children: [
+            HeroIcon(
+              HeroIcons.globeAlt,
+              style: selected ? HeroIconStyle.solid : HeroIconStyle.outline,
+              size:  20,
+              color: selected
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.45),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text('Anywhere', style: textTheme.titleMedium),
+            ),
+            if (selected)
+              HeroIcon(
+                HeroIcons.check,
+                style: HeroIconStyle.solid,
+                size:  20,
+                color: colorScheme.primary,
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

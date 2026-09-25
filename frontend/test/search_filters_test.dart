@@ -75,4 +75,13 @@ void main() {
 
     expect(matches.map((row) => row['id']), ['1', '2']);
   });
+
+   test('a cleared landmark keeps places from anywhere', () {
+    final matches = filter_listings(
+      listings,
+      const SearchQuery(),
+    );
+
+    expect(matches.map((row) => row['id']), ['1', '2']);
+  });
 }

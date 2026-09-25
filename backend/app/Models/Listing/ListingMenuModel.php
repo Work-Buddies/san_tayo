@@ -13,11 +13,15 @@ class ListingMenuModel extends Model
   public    $timestamps   = false;
 
   protected $fillable = [
-    'listing_id',
+    'listing_menu_group_id',
     'item',
     'price',
     'description',
     'deleted_at',
+  ];
+
+  protected $hidden = [
+    'image',
   ];
 
   protected $casts = [
@@ -25,8 +29,8 @@ class ListingMenuModel extends Model
     'deleted_at' => 'datetime',
   ];
 
-  public function listing()
+  public function group()
   {
-    return $this->belongsTo(ListingModel::class, 'listing_id');
+    return $this->belongsTo(ListingMenuGroupModel::class, 'listing_menu_group_id');
   }
 }

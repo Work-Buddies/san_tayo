@@ -96,6 +96,7 @@ CREATE TABLE listing (
     listing_status_id   CHAR(36)      NOT NULL,
     title               VARCHAR(255)  NOT NULL,
     description         LONGTEXT      NOT NULL,
+    banner_img          BLOB          NULL,
     address_street      VARCHAR(255)  NOT NULL,
     address_purok       VARCHAR(255)  NOT NULL,
     active              BOOLEAN       NOT NULL DEFAULT TRUE,
@@ -136,17 +137,31 @@ CREATE TABLE listing_img (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE listing_menu (
-    id          CHAR(36)       NOT NULL DEFAULT (UUID()) PRIMARY KEY,
-    listing_id  CHAR(36)       NOT NULL,
-    item        VARCHAR(255)   NOT NULL,
-    price       DECIMAL(10,2)  NOT NULL,
-    description LONGTEXT,
-    created_at  TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    deleted_at  TIMESTAMP      NULL DEFAULT NULL,
+CREATE TABLE listing_menu_group (
+    id          CHAR(36)      NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    listing_id  CHAR(36)      NOT NULL,
+    group_name  VARCHAR(255)  NOT NULL,
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at  TIMESTAMP     NULL DEFAULT NULL,
 
-    CONSTRAINT fk_listing_menu_listing
+    CONSTRAINT fk_listing_menu_group_listing
         FOREIGN KEY (listing_id) REFERENCES listing(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE listing_menu (
+    id                    CHAR(36)       NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+    listing_menu_group_id CHAR(36)       NOT NULL,
+    item                  VARCHAR(255)   NOT NULL,
+    price                 DECIMAL(10,2)  NOT NULL,
+    image                 BLOB           NULL,
+    description           LONGTEXT,
+    created_at            TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at            TIMESTAMP      NULL DEFAULT NULL,
+
+    CONSTRAINT fk_listing_menu_group
+        FOREIGN KEY (listing_menu_group_id) REFERENCES listing_menu_group(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -295,6 +310,10 @@ BEGIN
       AND deleted_at < (NOW() - INTERVAL 30 DAY);
 
     DELETE FROM listing_menu
+    WHERE deleted_at IS NOT NULL
+      AND deleted_at < (NOW() - INTERVAL 30 DAY);
+
+    DELETE FROM listing_menu_group
     WHERE deleted_at IS NOT NULL
       AND deleted_at < (NOW() - INTERVAL 30 DAY);
 
