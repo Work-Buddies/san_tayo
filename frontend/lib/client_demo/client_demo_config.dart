@@ -6,7 +6,7 @@
 ///
 /// Demo auth: register normally, then enter OTP **0000** (four zeros). Login uses the
 /// email/password you registered with.
-const bool kClientDemoForce = false;
+const bool kClientDemoForce = true;
 
 const bool kClientDemoFromDefine =
     bool.fromEnvironment('CLIENT_DEMO', defaultValue: false);

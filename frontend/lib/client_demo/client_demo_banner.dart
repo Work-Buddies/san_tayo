@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:san_tayo/client_demo/client_demo_config.dart';
 
-/// Thin strip so testers know they are on a local demo build.
+/// Floating demo label. Overlays the UI so maroon headers keep the same height.
 class ClientDemoBanner extends StatelessWidget {
   final Widget child;
 
@@ -15,34 +15,46 @@ class ClientDemoBanner extends StatelessWidget {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
+    final top         = MediaQuery.viewPaddingOf(context).top;
 
-    return Column(
+    return Stack(
+      fit: StackFit.expand,
       children: [
-        Material(
-          color: colorScheme.secondary,
-          child: SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline, size: 16, color: colorScheme.onSecondary),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Demo build — no server. OTP: $kClientDemoOtpCode',
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onSecondary,
-                        fontWeight: FontWeight.w600,
-                      ),
+        child,
+        Positioned(
+          top:  top + 4,
+          left: 12,
+          right: 12,
+          child: IgnorePointer(
+            child: Center(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color:        colorScheme.secondary.withValues(alpha: 0.94),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.12),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  child: Text(
+                    'Demo — no server · OTP $kClientDemoOtpCode',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color:      colorScheme.onSecondary,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-        Expanded(child: child),
       ],
     );
   }
