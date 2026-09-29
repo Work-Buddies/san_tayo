@@ -21,13 +21,14 @@ ImageProvider? image_provider_from(dynamic value) {
   }
 }
 
-/// Food-place card: photo, name, nearest landmark, and starting price.
+/// Food-place card: photo, name, landmark, price, and food-type tags.
 /// [fillHeight] grows the photo when the parent gives the card a fixed height.
 class ListingCard extends StatelessWidget {
   final ImageProvider? image;
   final String name;
   final String nearestLandmark;
   final num minPrice;
+  final List<String> tags;
   final bool fillHeight;
   final VoidCallback? onTap;
 
@@ -37,6 +38,7 @@ class ListingCard extends StatelessWidget {
     required this.name,
     required this.nearestLandmark,
     required this.minPrice,
+    this.tags = const [],
     this.fillHeight = false,
     this.onTap,
   });
@@ -111,6 +113,31 @@ class ListingCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  if (tags.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        spacing: 6,
+                        children: [
+                          for (final tag in tags)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color:        colorScheme.primary,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                tag,
+                                style: textTheme.labelSmall?.copyWith(
+                                  color: colorScheme.onPrimary,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

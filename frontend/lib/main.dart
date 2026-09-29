@@ -1,22 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'core/mobile/home_bar.dart';
 import 'core/mobile/splash_screen.dart';
 import 'core/web/skeleton.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  hide_home_bar();
   runApp(const SanTayoApp());
-}
-
-/// True for Android/iOS native builds; false on web and desktop.
-bool get isMobilePhone {
-  if (kIsWeb) {
-    return false;
-  }
-
-  return defaultTargetPlatform == TargetPlatform.android ||
-      defaultTargetPlatform == TargetPlatform.iOS;
 }
 
 class SanTayoApp extends StatelessWidget {
@@ -182,6 +173,7 @@ class SanTayoApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Mobile phone shows the branded splash; everything else uses the web shell.
+      navigatorObservers: [home_bar_observer],
       builder: (context, child) {
         return _AboveHomeBar(child: child ?? const SizedBox.shrink());
       },
@@ -190,24 +182,55 @@ class SanTayoApp extends StatelessWidget {
   }
 }
 
-/// Keeps every route, including short scroll views, above the system home bar.
-class _AboveHomeBar extends StatelessWidget {
+/// Insets the app only while the home bar is on screen.
+///
+/// [MediaQueryData.padding] drops to zero when that bar hides and grows again
+/// when a bottom swipe brings it back. [MediaQueryData.viewPadding] would keep
+/// the gap even while the bar is hidden.
+class _AboveHomeBar extends StatefulWidget {
   final Widget child;
 
   const _AboveHomeBar({required this.child});
 
   @override
+  State<_AboveHomeBar> createState() => _AboveHomeBarState();
+}
+
+class _AboveHomeBarState extends State<_AboveHomeBar> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    sync_home_bar();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      sync_home_bar();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final bottom = MediaQuery.viewPaddingOf(context).bottom;
+    final bottom = MediaQuery.paddingOf(context).bottom;
 
     return ColoredBox(
       color: Theme.of(context).colorScheme.surface,
-      child: Padding(
+      child: AnimatedPadding(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
         padding: EdgeInsets.only(bottom: bottom),
         child: MediaQuery.removePadding(
           context: context,
           removeBottom: true,
-          child: child,
+          child: widget.child,
         ),
       ),
     );

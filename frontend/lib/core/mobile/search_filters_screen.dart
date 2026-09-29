@@ -2,12 +2,16 @@
 import 'package:heroicons/heroicons.dart';
 import 'package:san_tayo/core/cache/app_cache.dart';
 import 'package:san_tayo/core/mobile/global_widgets/search_filter_widgets.dart';
+import 'package:san_tayo/core/mobile/home_bar.dart';
 import 'package:san_tayo/core/mobile/search_query.dart';
 import 'package:san_tayo/core/mobile/search_results_screen.dart';
 
 const int _party_size_max = 20;
 
 /// Full-screen search + filter overlay opened from the dashboard search bar.
+///
+/// The system home bar stays visible on this screen. Any page pushed over it,
+/// including results, hides the bar again.
 class SearchFiltersScreen extends StatefulWidget {
   final List<Map<String, dynamic>> landmarks;
   final List<Map<String, dynamic>> listings;
@@ -24,7 +28,7 @@ class SearchFiltersScreen extends StatefulWidget {
   State<SearchFiltersScreen> createState() => _SearchFiltersScreenState();
 }
 
-class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
+class _SearchFiltersScreenState extends State<SearchFiltersScreen> with RouteAware {
   final TextEditingController _search_controller = TextEditingController();
   final TextEditingController _landmark_controller = TextEditingController();
   final TextEditingController _budget_from_controller = TextEditingController();
@@ -48,12 +52,43 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute<dynamic>) {
+      home_bar_observer.subscribe(this, route);
+    }
+  }
+
+  @override
   void dispose() {
+    home_bar_observer.unsubscribe(this);
+    hide_home_bar();
     _search_controller.dispose();
     _landmark_controller.dispose();
     _budget_from_controller.dispose();
     _budget_to_controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didPush() {
+    show_home_bar();
+  }
+
+  @override
+  void didPopNext() {
+    show_home_bar();
+  }
+
+  @override
+  void didPushNext() {
+    hide_home_bar();
+  }
+
+  @override
+  void didPop() {
+    hide_home_bar();
   }
 
   Future<void> _load_recents() async {

@@ -51,6 +51,18 @@ class AboutScreen extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
+            child: Text(
+              about_credit,
+              textAlign: TextAlign.center,
+              style: textTheme.labelSmall?.copyWith(
+                fontSize: 10,
+                color: colorScheme.onSurface.withValues(alpha: 0.35),
+                letterSpacing: 0.3,
+              ),
+            ),
+          ),
         ],
       ),
     );

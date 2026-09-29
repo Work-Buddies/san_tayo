@@ -152,6 +152,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                           name: listing['name'].toString(),
                           nearestLandmark: listing['nearestLandmark'].toString(),
                           minPrice: listing['minPrice'] as num,
+                          tags: listing_food_type_names(listing),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => ListingView(listing: listing),

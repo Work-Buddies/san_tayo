@@ -9,6 +9,7 @@ import 'package:san_tayo/core/mobile/global_widgets/listing_card.dart';
 import 'package:san_tayo/core/mobile/listing_view.dart';
 import 'package:san_tayo/core/mobile/profile/profile_screen.dart';
 import 'package:san_tayo/core/mobile/search_filters_screen.dart';
+import 'package:san_tayo/core/mobile/search_query.dart';
 
 /// Mock listings that stand in for the Laravel listings endpoint.
 Future<List<Map<String, dynamic>>> get_listings() async {
@@ -253,6 +254,7 @@ class _DashboardState extends State<Dashboard> {
       name: listing['name'].toString(),
       nearestLandmark: listing['nearestLandmark'].toString(),
       minPrice: listing['minPrice'] as num,
+      tags: listing_food_type_names(listing),
       fillHeight: fillHeight,
       onTap: () => _open_listing(listing),
     );
@@ -298,9 +300,6 @@ class _DashboardState extends State<Dashboard> {
                 : LayoutBuilder(
               builder: (context, constraints) {
                 // Titles plus a peek of Discover More stay on screen; Near you takes the rest.
-                const reserved = 28.0 + 20.0 + 12.0 + 28.0 + 12.0 + 72.0;
-                final near_height = (constraints.maxHeight - 20 - reserved).clamp(240.0, constraints.maxHeight);
-
                 return ListView(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
                   children: [
@@ -313,7 +312,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     const SizedBox(height: 12),
                     SizedBox(
-                      height: near_height,
+                      height: 360,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: nearby.length,
