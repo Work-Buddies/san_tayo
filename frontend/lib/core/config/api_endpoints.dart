@@ -8,6 +8,11 @@ class ApiEndpoints {
   static const String auth_verify_otp = '/auth/verify-otp';
   static const String auth_resend_otp = '/auth/resend-otp';
   static const String auth_me         = '/auth/me';
+  static const String auth_logout     = '/auth/logout';
+
+  static const String account_upgrade_business = '/account/upgrade-business';
+  static const String account_username         = '/account/username';
+  static const String account_password         = '/account/password';
 
   static const String last_table_updates = '/lookups/last-table-updates';
   static const String landmarks           = '/landmarks';

@@ -69,10 +69,45 @@ class SearchQuery {
   }
 }
 
-/// Listings that match the typed query plus Saan / Ano / Magkano.
+/// Reverse of [parse_budget_range] for the known chips. Anything else is a custom from–to.
+({String? preset, String from, String to}) budget_fields_from_range(num? min, num? max) {
+  if (min == null && max == 50) {
+    return (preset: 'Under ₱50', from: '', to: '');
+  }
+  if (min == 50 && max == 100) {
+    return (preset: '₱50 – ₱100', from: '', to: '');
+  }
+  if (min == 100 && max == 200) {
+    return (preset: '₱100–₱200', from: '', to: '');
+  }
+  if (min == 200 && max == 500) {
+    return (preset: '₱200–₱500', from: '', to: '');
+  }
+  if (min == 500 && max == null) {
+    return (preset: '₱500+', from: '', to: '');
+  }
+  if (min == null && max == null) {
+    return (preset: null, from: '', to: '');
+  }
+
+  return (
+    preset: null,
+    from: min == null ? '' : _plain_number(min),
+    to: max == null ? '' : _plain_number(max),
+  );
+}
+
+String _plain_number(num value) {
+  if (value == value.roundToDouble()) {
+    return value.toInt().toString();
+  }
+  return value.toString();
+}
+
+/// Listings that match the typed query plus Saan / Ano / Magkano / Ilan.
 ///
-/// Ilan is kept on [SearchQuery] for the results header. Listings have no
-/// party-size field yet, so it does not drop rows.
+/// Magkano keeps a place when any menu price falls in range.
+/// Ilan keeps a place that has a pax tag covering the party size.
 List<Map<String, dynamic>> filter_listings(
   List<Map<String, dynamic>> listings,
   SearchQuery query,
@@ -102,12 +137,22 @@ bool listing_matches(Map<String, dynamic> listing, SearchQuery query) {
     }
   }
 
-  final price = listing['minPrice'];
-  if (price is num) {
-    if (query.min_price != null && price < query.min_price!) {
+  if (query.min_price != null || query.max_price != null) {
+    final prices = listing_menu_prices(listing);
+    final in_range = prices.any((price) => _price_in_budget(price, query));
+    if (!in_range) {
       return false;
     }
-    if (query.max_price != null && price > query.max_price!) {
+  }
+
+  if (query.party_size != null) {
+    final covered = listing_tags(listing).any((tag) {
+      if (tag['type']?.toString() != 'pax') {
+        return false;
+      }
+      return pax_tag_covers(tag['name']?.toString() ?? '', query.party_size!);
+    });
+    if (!covered) {
       return false;
     }
   }
@@ -115,12 +160,105 @@ bool listing_matches(Map<String, dynamic> listing, SearchQuery query) {
   return true;
 }
 
-List<String> listing_food_type_names(Map<String, dynamic> listing) {
-  final types = listing['food_types'];
-  if (types is! List) {
+bool _price_in_budget(num price, SearchQuery query) {
+  if (query.min_price != null && price < query.min_price!) {
+    return false;
+  }
+  if (query.max_price != null && price > query.max_price!) {
+    return false;
+  }
+  return true;
+}
+
+/// Every menu price. Falls back to minPrice when the menu has no numbers.
+List<num> listing_menu_prices(Map<String, dynamic> listing) {
+  final prices = <num>[];
+
+  void add(dynamic price) {
+    final value = price is num ? price : num.tryParse(price?.toString() ?? '');
+    if (value != null) {
+      prices.add(value);
+    }
+  }
+
+  final menu = listing['menu'];
+  if (menu is List) {
+    for (final item in menu) {
+      if (item is Map) {
+        add(item['price']);
+      }
+    }
+  }
+
+  final groups = listing['menu_groups'];
+  if (groups is List) {
+    for (final group in groups) {
+      if (group is! Map) {
+        continue;
+      }
+      final items = group['items'];
+      if (items is! List) {
+        continue;
+      }
+      for (final item in items) {
+        if (item is Map) {
+          add(item['price']);
+        }
+      }
+    }
+  }
+
+  if (prices.isEmpty) {
+    add(listing['minPrice']);
+  }
+
+  return prices;
+}
+
+/// Food-type and pax rows. A missing type is treated as foodtype.
+List<Map<String, dynamic>> listing_tags(Map<String, dynamic> listing) {
+  final raw = listing['food_types'] ?? listing['tags'];
+  if (raw is! List) {
     return [];
   }
-  return types.map((type) => type['name'].toString()).toList();
+
+  final tags = <Map<String, dynamic>>[];
+  for (final row in raw) {
+    if (row is! Map) {
+      continue;
+    }
+    final name = row['name']?.toString() ?? '';
+    if (name.isEmpty) {
+      continue;
+    }
+    tags.add({
+      'name': name,
+      'type': row['type']?.toString() ?? 'foodtype',
+    });
+  }
+  return tags;
+}
+
+/// True when a pax tag name covers [size]. "5+" covers 5 and up. "4 pax" covers 4.
+bool pax_tag_covers(String name, int size) {
+  final plus = RegExp(r'(\d+)\s*\+').firstMatch(name);
+  if (plus != null) {
+    final min = int.tryParse(plus.group(1) ?? '');
+    return min != null && size >= min;
+  }
+
+  final exact = RegExp(r'(\d+)').firstMatch(name);
+  if (exact == null) {
+    return false;
+  }
+  return int.tryParse(exact.group(1) ?? '') == size;
+}
+
+List<String> listing_food_type_names(Map<String, dynamic> listing) {
+  return listing_tags(listing)
+      .where((tag) => tag['type'] == 'foodtype')
+      .map((tag) => tag['name'].toString())
+      .toList();
 }
 
 String _listing_haystack(Map<String, dynamic> listing) {

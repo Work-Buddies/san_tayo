@@ -88,6 +88,69 @@ class SharedFunction
     return self::api_success('Valid.');
   }
 
+  /**
+   * @uses: Validate username update payload
+   * @author: Kai Yaneza
+   * Date: 2026-09-29
+   */
+  public static function validate_username_update($params) {
+    $rs = self::api_error('Validation failed.');
+
+    if (empty($params['username']) || strlen($params['username']) > 255) {
+      $rs['msg'] = 'Username is required and must be 255 characters or less.';
+      return $rs;
+    }
+
+    return self::api_success('Valid.');
+  }
+
+  /**
+   * @uses: Validate new password rules (length, number) without checking the current hash
+   * @author: Kai Yaneza
+   * Date: 2026-09-29
+   */
+  public static function validate_new_password($password) {
+    $rs = self::api_error('Validation failed.');
+
+    if (empty($password) || strlen($password) < 8) {
+      $rs['msg'] = 'Password must be at least 8 characters.';
+      return $rs;
+    }
+
+    if (!preg_match('/[0-9]/', (string) $password)) {
+      $rs['msg'] = 'Password must include a number.';
+      return $rs;
+    }
+
+    return self::api_success('Valid.');
+  }
+
+  /**
+   * @uses: Validate change-password payload fields are present
+   * @author: Kai Yaneza
+   * Date: 2026-09-29
+   */
+  public static function validate_password_change_payload($params) {
+    $rs = self::api_error('Validation failed.');
+
+    if (empty($params['current_password'])) {
+      $rs['msg'] = 'Current password is required.';
+      return $rs;
+    }
+
+    if (empty($params['new_password'])) {
+      $rs['msg'] = 'New password is required.';
+      return $rs;
+    }
+
+    $new_check = self::validate_new_password($params['new_password']);
+    if ($new_check['code'] != 1) {
+      return $new_check;
+    }
+
+    return self::api_success('Valid.');
+  }
+
   public static function validate_listing_payload($params, $is_update = false) {
     $rs = self::api_error('Validation failed.');
   

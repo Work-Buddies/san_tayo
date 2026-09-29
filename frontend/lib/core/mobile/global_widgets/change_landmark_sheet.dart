@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:san_tayo/core/mobile/global_widgets/drag_sheet.dart';
+
+bool _landmark_sheet_open = false;
 
 /// Darkens the screen and slides up a draggable landmark list. Dragging the
 /// panel back down (or tapping the dimmed area) cancels without changing the pick.
+/// A second tap while the sheet is already open is ignored.
 Future<Map<String, dynamic>?> show_change_landmark_sheet({
   required BuildContext context,
   required List<Map<String, dynamic>> landmarks,
   Map<String, dynamic>? selected,
 }) {
-  return showModalBottomSheet<Map<String, dynamic>>(
+  if (_landmark_sheet_open) {
+    return Future.value(null);
+  }
+
+  _landmark_sheet_open = true;
+  return show_drag_sheet<Map<String, dynamic>>(
     context: context,
-    isScrollControlled: true,
-    enableDrag: true,
-    isDismissible: true,
-    backgroundColor: Colors.transparent,
-    barrierColor: Colors.black.withValues(alpha: 0.55),
-    builder: (context) {
-      return DraggableScrollableSheet(
-        initialChildSize: 0.72,
-        minChildSize: 0.28,
-        maxChildSize: 0.92,
-        snap: true,
-        snapSizes: const [0.72],
-        shouldCloseOnMinExtent: true,
-        builder: (context, scroll_controller) {
-          return ChangeLandmarkSheet(
-            landmarks: landmarks,
-            selected: selected,
-            scrollController: scroll_controller,
-          );
-        },
+    builder: (context, scroll_controller) {
+      return ChangeLandmarkSheet(
+        landmarks: landmarks,
+        selected: selected,
+        scrollController: scroll_controller,
       );
     },
-  );
+  ).whenComplete(() {
+    _landmark_sheet_open = false;
+  });
 }
 
 /// Bottom panel: search + landmark rows. Selecting a row pops the sheet with that row.
@@ -83,25 +79,9 @@ class _ChangeLandmarkSheetState extends State<ChangeLandmarkSheet> {
     final textTheme   = Theme.of(context).textTheme;
     final filtered    = _filtered;
 
-    return Material(
-      color: colorScheme.surface,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-      clipBehavior: Clip.antiAlias,
-      child: ListView(
-        controller: widget.scrollController,
-        padding: EdgeInsets.fromLTRB(20, 10, 20, MediaQuery.paddingOf(context).bottom + 24),
-        children: [
-          Center(
-            child: Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.only(bottom: 16),
-              decoration: BoxDecoration(
-                color: colorScheme.onSurface.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
+    return DragSheetPanel(
+      scrollController: widget.scrollController,
+      children: [
           Row(
             children: [
               HeroIcon(
@@ -171,8 +151,7 @@ class _ChangeLandmarkSheetState extends State<ChangeLandmarkSheet> {
                 selected: _is_selected(landmark),
                 onTap: () => Navigator.of(context).pop(landmark),
               ),
-        ],
-      ),
+      ],
     );
   }
 }

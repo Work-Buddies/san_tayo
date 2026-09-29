@@ -17,4 +17,14 @@ class AccountRepository implements AccountRepoInterface
   {
     return $this->account_process->upgrade_to_business($account);
   }
+
+  public function update_username($account, $params)
+  {
+    return $this->account_process->update_username($account, $params);
+  }
+
+  public function change_password($account, $params)
+  {
+    return $this->account_process->change_password($account, $params);
+  }
 }

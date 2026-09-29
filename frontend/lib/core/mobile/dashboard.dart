@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:san_tayo/core/cache/app_cache.dart';
-import 'package:san_tayo/core/cache/cache_sync.dart';
-import 'package:san_tayo/core/config/api_endpoints.dart';
 import 'package:san_tayo/core/mobile/global_widgets/change_landmark_sheet.dart';
 import 'package:san_tayo/core/mobile/global_widgets/listing_card.dart';
 import 'package:san_tayo/core/mobile/listing_view.dart';
+import 'package:san_tayo/core/mobile/profile/profile_screen.dart';
 import 'package:san_tayo/core/mobile/search_filters_screen.dart';
-import 'package:san_tayo/core/network/api_client.dart';
 
 /// Mock listings that stand in for the Laravel listings endpoint.
 Future<List<Map<String, dynamic>>> get_listings() async {
@@ -46,7 +44,49 @@ Map<String, dynamic> normalize_listing(Map<String, dynamic> raw) {
 
   next['gallery'] = raw['gallery'] ?? raw['listing_img'] ?? raw['images'] ?? <dynamic>[];
   next['minPrice'] = raw['minPrice'] ?? _min_menu_price(next['menu_groups']);
+  _tag_food_types(next);
   return next;
+}
+
+/// Existing food-type rows are type foodtype.
+/// ponytail: mock JSON has no pax tags, so a small set is attached here until listings come from the API.
+void _tag_food_types(Map<String, dynamic> listing) {
+  final types = listing['food_types'];
+  if (types is! List) {
+    listing['food_types'] = <Map<String, dynamic>>[];
+    return;
+  }
+
+  var has_pax = false;
+  for (final type in types) {
+    if (type is! Map) {
+      continue;
+    }
+    type['type'] ??= 'foodtype';
+    if (type['type'] == 'pax') {
+      has_pax = true;
+    }
+  }
+
+  if (has_pax) {
+    return;
+  }
+
+  const sets = [
+    ['1 pax', '2 pax'],
+    ['2 pax', '4 pax'],
+    ['3 pax', '4 pax'],
+    ['4 pax', '5+ pax'],
+    ['1 pax', '5+ pax'],
+  ];
+  final bucket = (listing['id']?.toString() ?? '').hashCode.abs() % sets.length;
+  for (final name in sets[bucket]) {
+    types.add({
+      'name': name,
+      'type': 'pax',
+      'description': 'Party size this place can seat.',
+    });
+  }
 }
 
 num _min_menu_price(dynamic groups) {
@@ -107,50 +147,31 @@ class _DashboardState extends State<Dashboard> {
     final cached_selected = await get_selected_landmark();
     final resolved        = resolve_selected_landmark(cached_selected, cached_list);
 
-    if (mounted) {
-      setState(() {
-        _landmarks          = cached_list;
-        _selected_landmark  = resolved;
-      });
-    }
-
-    await sync_app_cache();
-
-    final list     = await get_cached_table('landmark');
-    final selected = resolve_selected_landmark(await get_selected_landmark(), list);
-    await save_selected_landmark(selected);
-
     if (!mounted) {
       return;
     }
 
     setState(() {
-      _landmarks         = list;
-      _selected_landmark = selected;
+      _landmarks         = cached_list;
+      _selected_landmark = resolved;
     });
   }
 
   Future<void> _open_landmark_sheet() async {
-    final probe = await api_request('GET', ApiEndpoints.health);
-    if (!mounted) {
-      return;
-    }
-
-    if (probe.is_network_error) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(const SnackBar(
-          content: Text("Can't change landmark while offline."),
-        ));
-      return;
-    }
-
     if (_landmarks.isEmpty) {
-      await sync_app_cache();
       final list = await get_cached_table('landmark');
-      if (mounted) {
-        setState(() => _landmarks = list);
+      if (!mounted) {
+        return;
       }
+      if (list.isEmpty) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(const SnackBar(
+            content: Text('Landmarks are not available yet.'),
+          ));
+        return;
+      }
+      setState(() => _landmarks = list);
     }
 
     if (!mounted) {
@@ -212,23 +233,37 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  List<String> _tags_of(Map<String, dynamic> listing) {
-    final types = listing['food_types'];
-    if (types is! List) {
-      return [];
-    }
-    return types.map((t) => t['name'].toString()).toList();
+  void _open_profile() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ProfileScreen(
+          landmarks: _landmarks,
+          selectedLandmark: _selected_landmark,
+          onLandmarkChanged: (picked) {
+            setState(() => _selected_landmark = picked);
+          },
+        ),
+      ),
+    );
   }
 
-  ListingCard _listing_card(Map<String, dynamic> listing) {
+  ListingCard _listing_card(Map<String, dynamic> listing, {bool fillHeight = false}) {
     return ListingCard(
       image: image_provider_from(listing['banner']),
       name: listing['name'].toString(),
       nearestLandmark: listing['nearestLandmark'].toString(),
       minPrice: listing['minPrice'] as num,
-      tags: _tags_of(listing),
+      fillHeight: fillHeight,
       onTap: () => _open_listing(listing),
     );
+  }
+
+  num _price_of(Map<String, dynamic> listing) {
+    final price = listing['minPrice'];
+    if (price is num) {
+      return price;
+    }
+    return num.tryParse(price?.toString() ?? '') ?? 0;
   }
 
   @override
@@ -239,7 +274,8 @@ class _DashboardState extends State<Dashboard> {
                     .where((p) => (p['nearestLandmark'] as String)
                         .toLowerCase()
                         .contains(landmark_q))
-                    .toList();
+                    .toList()
+                  ..sort((a, b) => _price_of(a).compareTo(_price_of(b)));
     final discover = _listings
                     .where((p) => !(p['nearestLandmark'] as String)
                         .toLowerCase()
@@ -254,50 +290,69 @@ class _DashboardState extends State<Dashboard> {
             landmarkName: _selected_landmark_name,
             onLandmarkTap: _open_landmark_sheet,
             onSearchTap: _open_search,
+            onProfileTap: _open_profile,
           ),
           Expanded(
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
-                : ListView(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-              children: [
-                Text('Near you', style: Theme.of(context).textTheme.headlineSmall),
-                Text(
-                  'Walking distance from your landmark',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurface.withValues(alpha: 0.65),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  height: 300,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: nearby.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 12),
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: 280,
-                        child: _listing_card(nearby[index]),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 28),
-                Text('Discover More', style: Theme.of(context).textTheme.headlineSmall),
-                const SizedBox(height: 12),
-                for (final listing in discover) ...[
-                  _listing_card(listing),
-                  const SizedBox(height: 12),
-                ],
-              ],
+                : LayoutBuilder(
+              builder: (context, constraints) {
+                // Titles plus a peek of Discover More stay on screen; Near you takes the rest.
+                const reserved = 28.0 + 20.0 + 12.0 + 28.0 + 12.0 + 72.0;
+                final near_height = (constraints.maxHeight - 20 - reserved).clamp(240.0, constraints.maxHeight);
+
+                return ListView(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+                  children: [
+                    Text('Near you', style: Theme.of(context).textTheme.headlineSmall),
+                    Text(
+                      'Walking distance from your landmark',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurface.withValues(alpha: 0.65),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      height: near_height,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: nearby.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 12),
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 280,
+                            child: _listing_card(nearby[index], fillHeight: true),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 28),
+                    Text('Discover More', style: Theme.of(context).textTheme.headlineSmall),
+                    const SizedBox(height: 12),
+                    for (final listing in discover) ...[
+                      _listing_card(listing),
+                      const SizedBox(height: 12),
+                    ],
+                  ],
+                );
+              },
             ),
           ),
         ],
       ),
       bottomNavigationBar: DashboardNavBar(
         currentIndex: _tabIndex,
-        onTap: (index) => setState(() => _tabIndex = index),
+        onTap: (index) {
+          if (index == 2) {
+            _open_profile();
+            return;
+          }
+          if (index == 1) {
+            _open_search();
+            return;
+          }
+          setState(() => _tabIndex = index);
+        },
       ),
     );
   }
@@ -308,12 +363,14 @@ class DashboardHeader extends StatelessWidget {
   final String landmarkName;
   final VoidCallback onLandmarkTap;
   final VoidCallback onSearchTap;
+  final VoidCallback onProfileTap;
 
   const DashboardHeader({
     super.key,
     required this.landmarkName,
     required this.onLandmarkTap,
     required this.onSearchTap,
+    required this.onProfileTap,
   });
 
   @override
@@ -387,19 +444,26 @@ class DashboardHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                width:  44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: colorScheme.secondary.withValues(alpha: 0.35),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: colorScheme.secondary, width: 2),
-                ),
-                child: HeroIcon(
-                  HeroIcons.user,
-                  style: HeroIconStyle.solid,
-                  color: colorScheme.onPrimary,
-                  size:  22,
+              Material(
+                color: colorScheme.secondary.withValues(alpha: 0.35),
+                shape: const CircleBorder(),
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: onProfileTap,
+                  child: Container(
+                    width:  44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: colorScheme.secondary, width: 2),
+                    ),
+                    child: HeroIcon(
+                      HeroIcons.user,
+                      style: HeroIconStyle.solid,
+                      color: colorScheme.onPrimary,
+                      size:  22,
+                    ),
+                  ),
                 ),
               ),
             ],

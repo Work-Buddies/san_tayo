@@ -15,5 +15,6 @@ class FoodTypeModel extends Model
   protected $fillable = [
     'name',
     'description',
+    'type',
   ];
 }

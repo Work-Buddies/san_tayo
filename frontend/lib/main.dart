@@ -1,22 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'core/mobile/splash_screen.dart';
 import 'core/web/skeleton.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // On phones, drop the system navigation bar but keep the status bar. The bar is only hidden,
-  // not disabled — a swipe from the bottom edge still pulls it back up on demand.
-  if (isMobilePhone) {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top],
-    );
-  }
-
   runApp(const SanTayoApp());
 }
 
@@ -193,7 +182,34 @@ class SanTayoApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Mobile phone shows the branded splash; everything else uses the web shell.
+      builder: (context, child) {
+        return _AboveHomeBar(child: child ?? const SizedBox.shrink());
+      },
       home: isMobilePhone ? const SplashScreen() : const WebSkeleton(),
+    );
+  }
+}
+
+/// Keeps every route, including short scroll views, above the system home bar.
+class _AboveHomeBar extends StatelessWidget {
+  final Widget child;
+
+  const _AboveHomeBar({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final bottom = MediaQuery.viewPaddingOf(context).bottom;
+
+    return ColoredBox(
+      color: Theme.of(context).colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottom),
+        child: MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
+          child: child,
+        ),
+      ),
     );
   }
 }

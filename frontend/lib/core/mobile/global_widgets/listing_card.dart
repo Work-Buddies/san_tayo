@@ -21,13 +21,14 @@ ImageProvider? image_provider_from(dynamic value) {
   }
 }
 
-/// Food-place card: photo, name, nearest landmark, starting price, and tags.
+/// Food-place card: photo, name, nearest landmark, and starting price.
+/// [fillHeight] grows the photo when the parent gives the card a fixed height.
 class ListingCard extends StatelessWidget {
   final ImageProvider? image;
   final String name;
   final String nearestLandmark;
   final num minPrice;
-  final List<String> tags;
+  final bool fillHeight;
   final VoidCallback? onTap;
 
   const ListingCard({
@@ -36,7 +37,7 @@ class ListingCard extends StatelessWidget {
     required this.name,
     required this.nearestLandmark,
     required this.minPrice,
-    required this.tags,
+    this.fillHeight = false,
     this.onTap,
   });
 
@@ -54,14 +55,15 @@ class ListingCard extends StatelessWidget {
         onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: fillHeight ? MainAxisSize.max : MainAxisSize.min,
           children: [
-            AspectRatio(
-              aspectRatio: 16 / 10,
-              child: image == null
-                  ? const ColoredBox(color: Color(0xFF4A4A4A))
-                  : Image(image: image!, fit: BoxFit.cover, width: double.infinity),
-            ),
+            if (fillHeight)
+              Expanded(child: _CardPhoto(image: image))
+            else
+              AspectRatio(
+                aspectRatio: 16 / 10,
+                child: _CardPhoto(image: image),
+              ),
             Padding(
               padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
               child: Column(
@@ -109,31 +111,6 @@ class ListingCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (tags.isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        spacing: 6,
-                        children: [
-                          for (final tag in tags)
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color:        colorScheme.primary,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                tag,
-                                style: textTheme.labelSmall?.copyWith(
-                                  color: colorScheme.onPrimary,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
                 ],
               ),
             ),
@@ -141,5 +118,19 @@ class ListingCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _CardPhoto extends StatelessWidget {
+  final ImageProvider? image;
+
+  const _CardPhoto({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    if (image == null) {
+      return const ColoredBox(color: Color(0xFF4A4A4A));
+    }
+    return Image(image: image!, fit: BoxFit.cover, width: double.infinity, height: double.infinity);
   }
 }

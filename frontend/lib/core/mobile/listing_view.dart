@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:san_tayo/core/mobile/global_widgets/listing_card.dart';
+import 'package:san_tayo/core/mobile/search_query.dart';
 
 /// Place page: banner, logo, description, then Menu or Gallery.
 class ListingView extends StatefulWidget {
@@ -44,18 +45,7 @@ class _ListingViewState extends State<ListingView> {
     return images.whereType<Map>().map((row) => Map<String, dynamic>.from(row)).toList();
   }
 
-  List<String> get _food_types {
-    final types = widget.listing['food_types'];
-    if (types is! List) {
-      return [];
-    }
-    return types.map((type) {
-      if (type is Map) {
-        return type['name']?.toString() ?? '';
-      }
-      return type.toString();
-    }).where((name) => name.isNotEmpty).toList();
-  }
+  List<Map<String, dynamic>> get _tags => listing_tags(widget.listing);
 
   @override
   Widget build(BuildContext context) {
@@ -157,21 +147,21 @@ class _ListingViewState extends State<ListingView> {
                     ),
                   ),
                 ],
-                if (_food_types.isNotEmpty) ...[
+                if (_tags.isNotEmpty) ...[
                   const SizedBox(height: 10),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: [
-                      for (final name in _food_types)
+                      for (final tag in _tags)
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: tag['type'] == 'pax' ? colorScheme.secondary : Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.12)),
                           ),
-                          child: Text(name, style: textTheme.labelSmall),
+                          child: Text(tag['name'].toString(), style: textTheme.labelSmall),
                         ),
                     ],
                   ),
@@ -371,6 +361,85 @@ class MenuItemRow extends StatelessWidget {
   }
 }
 
+/// Full-screen pager. Pinch to zoom the current photo.
+class GalleryViewer extends StatefulWidget {
+  final List<Map<String, dynamic>> images;
+  final int initialIndex;
+
+  const GalleryViewer({
+    super.key,
+    required this.images,
+    required this.initialIndex,
+  });
+
+  @override
+  State<GalleryViewer> createState() => _GalleryViewerState();
+}
+
+class _GalleryViewerState extends State<GalleryViewer> {
+  late final PageController _page;
+
+  @override
+  void initState() {
+    super.initState();
+    _page = PageController(initialPage: widget.initialIndex);
+  }
+
+  @override
+  void dispose() {
+    _page.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final top = MediaQuery.paddingOf(context).top;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          PageView.builder(
+            controller: _page,
+            itemCount: widget.images.length,
+            itemBuilder: (context, index) {
+              final provider = image_provider_from(
+                widget.images[index]['image'] ?? widget.images[index]['img_base64'],
+              );
+              return InteractiveViewer(
+                minScale: 1,
+                maxScale: 4,
+                child: Center(
+                  child: provider == null
+                      ? const ColoredBox(color: Color(0xFF4A4A4A), child: SizedBox(width: 120, height: 120))
+                      : Image(image: provider, fit: BoxFit.contain),
+                ),
+              );
+            },
+          ),
+          Positioned(
+            top: top + 8,
+            left: 12,
+            child: Material(
+              color: Colors.white,
+              shape: const CircleBorder(),
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: const HeroIcon(
+                  HeroIcons.arrowLeft,
+                  style: HeroIconStyle.solid,
+                  color: Colors.black,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _GalleryBody extends StatelessWidget {
   final List<Map<String, dynamic>> images;
 
@@ -395,14 +464,23 @@ class _GalleryBody extends StatelessWidget {
           runSpacing: 12,
           children: [
             for (var i = 0; i < images.length; i++)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: SizedBox(
-                  width: i % 7 == 5 ? tile * 2 + 12 : tile,
-                  height: tile * 0.85,
-                  child: _Photo(
-                    provider: image_provider_from(
-                      images[i]['image'] ?? images[i]['img_base64'],
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => GalleryViewer(images: images, initialIndex: i),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: SizedBox(
+                    width: i % 7 == 5 ? tile * 2 + 12 : tile,
+                    height: tile * 0.85,
+                    child: _Photo(
+                      provider: image_provider_from(
+                        images[i]['image'] ?? images[i]['img_base64'],
+                      ),
                     ),
                   ),
                 ),

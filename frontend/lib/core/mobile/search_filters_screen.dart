@@ -1,40 +1,9 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:san_tayo/core/cache/app_cache.dart';
-import 'package:san_tayo/core/mobile/global_widgets/change_landmark_sheet.dart';
+import 'package:san_tayo/core/mobile/global_widgets/search_filter_widgets.dart';
 import 'package:san_tayo/core/mobile/search_query.dart';
 import 'package:san_tayo/core/mobile/search_results_screen.dart';
-
-const List<String> _food_type_options = [
-  'Fried food',
-  'Rice Meals',
-  'Street Food',
-  'Soup',
-  'Dessert',
-  'Beverages',
-  'Snacks',
-  'Noodles',
-  'Inihaw',
-  'Silog',
-  'Veggie',
-  'Fast Food',
-];
-
-const List<String> _budget_options = [
-  'Under ₱50',
-  '₱50 – ₱100',
-  '₱100–₱200',
-  '₱200–₱500',
-  '₱500+',
-];
-
-const List<({String label, int size})> _party_presets = [
-  (label: 'Solo (1 pax)',     size: 1),
-  (label: 'Duo (2 pax)',      size: 2),
-  (label: 'Trio (3 pax)',     size: 3),
-  (label: 'Squad (4 pax)',    size: 4),
-  (label: 'Barkada (5 pax)',  size: 5),
-];
 
 const int _party_size_max = 20;
 
@@ -115,6 +84,7 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
       MaterialPageRoute(
         builder: (_) => SearchResultsScreen(
           listings: widget.listings,
+          landmarks: widget.landmarks,
           query: SearchQuery(
             text: value,
             landmark_name: _query_landmark_name,
@@ -132,12 +102,44 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
     }
 
     _search_controller.value = TextEditingValue(
-      text: popped.text,
-      selection: TextSelection.collapsed(offset: popped.text.length),
+      text: popped.query.text,
+      selection: TextSelection.collapsed(offset: popped.query.text.length),
     );
+    _apply_query(popped.query);
     if (popped.show_filters) {
       _select_shortcut(popped.section);
     }
+  }
+
+  void _apply_query(SearchQuery query) {
+    final fields = budget_fields_from_range(query.min_price, query.max_price);
+    _budget_from_controller.text = fields.from;
+    _budget_to_controller.text   = fields.to;
+    _landmark_controller.clear();
+
+    final name = query.landmark_name?.trim() ?? '';
+    Map<String, dynamic> landmark = {};
+    if (name.isNotEmpty) {
+      for (final row in widget.landmarks) {
+        if (row['name']?.toString().toLowerCase() == name.toLowerCase()) {
+          landmark = row;
+          break;
+        }
+      }
+      if (landmark.isEmpty) {
+        landmark = {'name': name};
+      }
+    }
+
+    setState(() {
+      _filter_landmark = landmark;
+      _food_types
+        ..clear()
+        ..addAll(query.food_types);
+      _budget         = fields.preset;
+      _party_size     = query.party_size;
+      _landmark_query = '';
+    });
   }
 
   Future<void> _clear_recents() async {
@@ -328,8 +330,7 @@ class _SearchFiltersScreenState extends State<SearchFiltersScreen> {
                     trailing: _ano_trailing,
                     expanded: _is_expanded(SearchFilterSection.ano),
                     onToggle: () => _toggle_section(SearchFilterSection.ano),
-                    child: FilterChipWrap(
-                      options: _food_type_options,
+                    child: AnoFilterBody(
                       selected: _food_types,
                       onSelected: (value) => setState(() {
                         if (_food_types.contains(value)) {
@@ -881,443 +882,6 @@ class FilterAccordion extends StatelessWidget {
               child: child,
             ),
         ],
-      ),
-    );
-  }
-}
-
-/// Landmark search + pick list used inside the Saan accordion.
-class SaanFilterBody extends StatelessWidget {
-  final TextEditingController controller;
-  final List<Map<String, dynamic>> landmarks;
-  final bool anywhereSelected;
-  final bool Function(Map<String, dynamic> landmark) isSelected;
-  final ValueChanged<String> onQueryChanged;
-  final VoidCallback onAnywhere;
-  final ValueChanged<Map<String, dynamic>> onPick;
-
-  const SaanFilterBody({
-    super.key,
-    required this.controller,
-    required this.landmarks,
-    required this.anywhereSelected,
-    required this.isSelected,
-    required this.onQueryChanged,
-    required this.onAnywhere,
-    required this.onPick,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme   = Theme.of(context).textTheme;
-
-    return Column(
-      children: [
-        TextField(
-          controller: controller,
-          onChanged: onQueryChanged,
-          style: textTheme.bodyMedium,
-          decoration: InputDecoration(
-            hintText: 'Search landmark or campus',
-            hintStyle: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurface.withValues(alpha: 0.45),
-            ),
-            filled: true,
-            fillColor: colorScheme.surface,
-            isDense: true,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 12, right: 4),
-              child: HeroIcon(
-                HeroIcons.magnifyingGlass,
-                style: HeroIconStyle.outline,
-                color: colorScheme.onSurface.withValues(alpha: 0.45),
-                size:  20,
-              ),
-            ),
-            prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: BorderSide.none,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        AnywherePickRow(
-          selected: anywhereSelected,
-          onTap: onAnywhere,
-        ),
-        if (landmarks.isEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Text(
-              'No landmarks found.',
-              style: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.55),
-              ),
-            ),
-          )
-        else
-          for (final landmark in landmarks)
-            LandmarkPickRow(
-              landmark: landmark,
-              selected: isSelected(landmark),
-              onTap: () => onPick(landmark),
-            ),
-      ],
-    );
-  }
-}
-
-/// Clears Saan. Stays at the top of the list while the landmark search is active.
-class AnywherePickRow extends StatelessWidget {
-  final bool selected;
-  final VoidCallback onTap;
-
-  const AnywherePickRow({
-    super.key,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme   = Theme.of(context).textTheme;
-
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.08)),
-          ),
-        ),
-        child: Row(
-          children: [
-            HeroIcon(
-              HeroIcons.globeAlt,
-              style: selected ? HeroIconStyle.solid : HeroIconStyle.outline,
-              size:  20,
-              color: selected
-                  ? colorScheme.primary
-                  : colorScheme.onSurface.withValues(alpha: 0.45),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text('Anywhere', style: textTheme.titleMedium),
-            ),
-            if (selected)
-              HeroIcon(
-                HeroIcons.check,
-                style: HeroIconStyle.solid,
-                size:  20,
-                color: colorScheme.primary,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Outlined option chips with a sage fill when selected. Supports multi-select.
-class FilterChipWrap extends StatelessWidget {
-  final List<String> options;
-  final Set<String> selected;
-  final ValueChanged<String> onSelected;
-
-  const FilterChipWrap({
-    super.key,
-    required this.options,
-    required this.onSelected,
-    this.selected = const {},
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        for (final option in options)
-          FilterOptionChip(
-            label: option,
-            selected: selected.contains(option),
-            onTap: () => onSelected(option),
-          ),
-      ],
-    );
-  }
-}
-
-class FilterOptionChip extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const FilterOptionChip({
-    super.key,
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Material(
-      color: selected ? colorScheme.secondary : Colors.white,
-      borderRadius: BorderRadius.circular(24),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: colorScheme.primary.withValues(alpha: 0.55)),
-          ),
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: colorScheme.primary,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Budget chips plus a custom from–to range.
-class MagkanoFilterBody extends StatelessWidget {
-  final String? selected;
-  final TextEditingController fromController;
-  final TextEditingController toController;
-  final ValueChanged<String> onSelected;
-  final VoidCallback onRangeChanged;
-
-  const MagkanoFilterBody({
-    super.key,
-    required this.fromController,
-    required this.toController,
-    required this.onSelected,
-    required this.onRangeChanged,
-    this.selected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme   = Theme.of(context).textTheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FilterChipWrap(
-          options: _budget_options,
-          selected: selected == null ? const {} : {selected!},
-          onSelected: onSelected,
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Text(
-              'Budget range:',
-              style: textTheme.bodySmall?.copyWith(color: colorScheme.primary),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: BudgetRangeField(
-                controller: fromController,
-                hint: 'From',
-                onChanged: (_) => onRangeChanged(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Text('-', style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary)),
-            ),
-            Expanded(
-              child: BudgetRangeField(
-                controller: toController,
-                hint: 'To',
-                onChanged: (_) => onRangeChanged(),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-/// Ilan chips plus a minus / plus stepper for a custom headcount.
-class IlanFilterBody extends StatelessWidget {
-  final int? partySize;
-  final ValueChanged<int> onPresetTap;
-  final VoidCallback onMinus;
-  final VoidCallback onPlus;
-
-  const IlanFilterBody({
-    super.key,
-    required this.onPresetTap,
-    required this.onMinus,
-    required this.onPlus,
-    this.partySize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final preset in _party_presets)
-              FilterOptionChip(
-                label: preset.label,
-                selected: partySize == preset.size,
-                onTap: () => onPresetTap(preset.size),
-              ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        PartySizeStepper(
-          count: partySize ?? 1,
-          onMinus: onMinus,
-          onPlus: onPlus,
-        ),
-      ],
-    );
-  }
-}
-
-class PartySizeStepper extends StatelessWidget {
-  final int count;
-  final VoidCallback onMinus;
-  final VoidCallback onPlus;
-
-  const PartySizeStepper({
-    super.key,
-    required this.count,
-    required this.onMinus,
-    required this.onPlus,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme   = Theme.of(context).textTheme;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _StepperButton(label: '-', onTap: onMinus),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Text(
-                '$count',
-                style: textTheme.titleLarge?.copyWith(color: colorScheme.primary),
-              ),
-              Text(
-                count == 1 ? 'person' : 'people',
-                style: textTheme.bodySmall?.copyWith(color: colorScheme.primary),
-              ),
-            ],
-          ),
-        ),
-        _StepperButton(label: '+', onTap: onPlus),
-      ],
-    );
-  }
-}
-
-class _StepperButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-
-  const _StepperButton({
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Material(
-      color: Colors.white,
-      shape: const CircleBorder(),
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const CircleBorder(),
-        child: Container(
-          width:  36,
-          height: 36,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: colorScheme.primary),
-          ),
-          child: Text(
-            label,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: colorScheme.primary,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class BudgetRangeField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hint;
-  final ValueChanged<String> onChanged;
-
-  const BudgetRangeField({
-    super.key,
-    required this.controller,
-    required this.hint,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme   = Theme.of(context).textTheme;
-
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      keyboardType: TextInputType.number,
-      style: textTheme.bodySmall?.copyWith(color: colorScheme.primary),
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: textTheme.bodySmall?.copyWith(color: colorScheme.primary),
-        isDense: true,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: colorScheme.primary),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: colorScheme.primary),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: colorScheme.primary, width: 1.4),
-        ),
       ),
     );
   }

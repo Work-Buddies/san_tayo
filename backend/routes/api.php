@@ -38,6 +38,9 @@ Route::middleware(['client.key'])->group(function () {
     Route::post('/account/upgrade-business', [AccountController::class, 'upgrade_business'])
       ->middleware('auth.level:user');
 
+    Route::put('/account/username', [AccountController::class, 'update_username']);
+    Route::put('/account/password', [AccountController::class, 'change_password']);
+
     // Landmarks
     Route::post('/landmarks',            [LandmarkController::class, 'store'])
       ->middleware('auth.level:business,admin');

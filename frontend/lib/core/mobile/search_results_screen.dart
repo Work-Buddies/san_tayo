@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:san_tayo/core/cache/app_cache.dart';
 import 'package:san_tayo/core/mobile/global_widgets/listing_card.dart';
+import 'package:san_tayo/core/mobile/global_widgets/search_filter_widgets.dart';
 import 'package:san_tayo/core/mobile/listing_view.dart';
 import 'package:san_tayo/core/mobile/search_query.dart';
 
 /// Sent back to the filter screen when results closes.
 ///
-/// [show_filters] true opens a shortcut. A null [section] with [show_filters]
-/// true is the hamburger (every accordion). Phone back sets [show_filters] false.
+/// [show_filters] stays false for phone back. Filter chips edit in place.
 class ResultsPop {
-  final String text;
+  final SearchQuery query;
   final bool show_filters;
   final SearchFilterSection? section;
 
   const ResultsPop({
-    required this.text,
+    required this.query,
     this.show_filters = false,
     this.section,
   });
@@ -24,11 +24,13 @@ class ResultsPop {
 /// Listing list for a submitted search. The phone back button returns to filters.
 class SearchResultsScreen extends StatefulWidget {
   final List<Map<String, dynamic>> listings;
+  final List<Map<String, dynamic>> landmarks;
   final SearchQuery query;
 
   const SearchResultsScreen({
     super.key,
     required this.listings,
+    required this.landmarks,
     required this.query,
   });
 
@@ -53,14 +55,32 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     super.dispose();
   }
 
-  void _leave({required bool show_filters, SearchFilterSection? section}) {
+  void _leave() {
     Navigator.of(context).pop(
       ResultsPop(
-        text: _search_controller.text,
-        show_filters: show_filters,
-        section: section,
+        query: SearchQuery(
+          text: _search_controller.text,
+          landmark_name: _query.landmark_name,
+          food_types: _query.food_types,
+          min_price: _query.min_price,
+          max_price: _query.max_price,
+          party_size: _query.party_size,
+        ),
       ),
     );
+  }
+
+  Future<void> _open_filter(SearchFilterSection? section) async {
+    final next = await show_search_filter_sheet(
+      context: context,
+      query: _query,
+      landmarks: widget.landmarks,
+      section: section,
+    );
+    if (!mounted) {
+      return;
+    }
+    setState(() => _query = next);
   }
 
   Future<void> _submit(String value) async {
@@ -89,7 +109,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         if (did_pop) {
           return;
         }
-        _leave(show_filters: false);
+        _leave();
       },
       child: Scaffold(
         backgroundColor: colorScheme.surface,
@@ -100,7 +120,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
               searchController: _search_controller,
               query: _query,
               onSubmitted: _submit,
-              onShortcutTap: (section) => _leave(show_filters: true, section: section),
+              onShortcutTap: _open_filter,
             ),
             Expanded(
               child: matches.isEmpty
@@ -132,7 +152,6 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                           name: listing['name'].toString(),
                           nearestLandmark: listing['nearestLandmark'].toString(),
                           minPrice: listing['minPrice'] as num,
-                          tags: listing_food_type_names(listing),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => ListingView(listing: listing),
@@ -276,6 +295,7 @@ class ResultsShortcutRow extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
             child: Row(
               children: [
                 ResultsFilterChip(
@@ -335,7 +355,9 @@ class ResultsFilterChip extends StatelessWidget {
     final textTheme   = Theme.of(context).textTheme;
     final icon_only   = label == null;
 
-    return Stack(
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, right: 10),
+      child: Stack(
       clipBehavior: Clip.none,
       children: [
         Material(
@@ -383,11 +405,11 @@ class ResultsFilterChip extends StatelessWidget {
             right: -6,
             child: Container(
               constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: colorScheme.secondary,
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: colorScheme.primary, width: 1),
               ),
               child: Text(
@@ -402,6 +424,7 @@ class ResultsFilterChip extends StatelessWidget {
             ),
           ),
       ],
+      ),
     );
   }
 }

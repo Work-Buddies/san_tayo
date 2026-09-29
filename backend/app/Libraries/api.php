@@ -251,6 +251,7 @@ class api
         'food_type_id' => $lft->food_type_id,
         'name'         => $lft->food_type?->name,
         'description'  => $lft->food_type?->description,
+        'type'         => $lft->food_type?->type ?? 'foodtype',
         'deleted_at'   => $lft->deleted_at,
       ];
     }

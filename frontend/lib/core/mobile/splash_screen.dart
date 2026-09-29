@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../cache/cache_sync.dart';
 import '../config/api_endpoints.dart';
 import '../network/api_client.dart';
 import '../network/session.dart';
@@ -20,10 +21,10 @@ enum StartDestination {
 /// deleted or the token revoked. A request that never reached the server is NOT a
 /// rejection, otherwise every offline launch would silently sign the user out.
 StartDestination decide_start({
-  required bool has_session,
-  required bool reachable,
-  required bool server_rejected,
-}) {
+    required bool has_session,
+    required bool reachable,
+    required bool server_rejected,
+  }) {
   if (!has_session) {
     return reachable ? StartDestination.sign_in_online : StartDestination.sign_in_offline;
   }
@@ -56,7 +57,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _app_preload() async {
     final started_at = DateTime.now();
 
-    final destination = await _resolve_destination();
+    final destination_future = _resolve_destination();
+    final cache_future       = sync_app_cache();
+    final destination        = await destination_future;
+    await cache_future;
 
     // Keep splash visible for at least 1 second.
     final elapsed   = DateTime.now().difference(started_at);

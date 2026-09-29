@@ -10,8 +10,8 @@ class ApiConfig {
     }
 
     if (Platform.isAndroid) {
-      // Android emulator maps host machine localhost to 10.0.2.2
-      return 'http://192.168.1.7:8000/api';
+      // Physical phone on the same Wi-Fi as this machine (192.168.1.4).
+      return 'http://192.168.1.4:8000/api';
     }
 
     // iOS simulator, Windows, macOS, Linux
