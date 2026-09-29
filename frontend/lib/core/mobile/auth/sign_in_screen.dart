@@ -148,10 +148,9 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 20),
         const PanelLabel(text: 'Password'),
         const SizedBox(height: 8),
-        AuthTextField(
+        AuthPasswordField(
           controller:      _passwordCtrl,
           enabled:         !_isOffline,
-          obscureText:     true,
           textInputAction: TextInputAction.done,
           onSubmitted:     (_) => _signIn(),
           hint:            '••••••••',

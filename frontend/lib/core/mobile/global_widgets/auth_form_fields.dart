@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'password_reveal_field.dart';
+
 /// Cream pill-shaped input used by every field on the auth screens. The placeholder is a
 /// washed-out maroon so it reads clearly as a hint rather than as entered text.
 InputDecoration authFieldDecoration(BuildContext context, {String? hint}) {
@@ -58,6 +60,36 @@ class AuthTextField extends StatelessWidget {
       enabled:         enabled,
       obscureText:     obscureText,
       keyboardType:    keyboardType,
+      textInputAction: textInputAction,
+      onSubmitted:     onSubmitted,
+      style:           authFieldTextStyle(context),
+      decoration:      authFieldDecoration(context, hint: hint),
+    );
+  }
+}
+
+/// Obscured auth field with a trailing eye toggle.
+class AuthPasswordField extends StatelessWidget {
+  final TextEditingController controller;
+  final String? hint;
+  final bool enabled;
+  final TextInputAction textInputAction;
+  final ValueChanged<String>? onSubmitted;
+
+  const AuthPasswordField({
+    super.key,
+    required this.controller,
+    this.hint,
+    this.enabled         = true,
+    this.textInputAction = TextInputAction.next,
+    this.onSubmitted,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PasswordRevealField(
+      controller:      controller,
+      enabled:         enabled,
       textInputAction: textInputAction,
       onSubmitted:     onSubmitted,
       style:           authFieldTextStyle(context),

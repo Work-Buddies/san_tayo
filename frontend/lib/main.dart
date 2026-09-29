@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/mobile/home_bar.dart';
 import 'core/mobile/splash_screen.dart';
 import 'core/web/skeleton.dart';
+import 'client_demo/client_demo_banner.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -175,7 +176,9 @@ class SanTayoApp extends StatelessWidget {
       // Mobile phone shows the branded splash; everything else uses the web shell.
       navigatorObservers: [home_bar_observer],
       builder: (context, child) {
-        return _AboveHomeBar(child: child ?? const SizedBox.shrink());
+        return ClientDemoBanner(
+          child: _AboveHomeBar(child: child ?? const SizedBox.shrink()),
+        );
       },
       home: isMobilePhone ? const SplashScreen() : const WebSkeleton(),
     );

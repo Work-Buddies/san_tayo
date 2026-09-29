@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../config/api_endpoints.dart';
+import '../../../client_demo/client_demo_config.dart';
 import '../../network/api_client.dart';
 import '../global_widgets/auth_buttons.dart';
 import 'auth_helpers.dart';
@@ -198,6 +199,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   color: onPrimary,
                 ),
               ),
+              if (is_client_demo_enabled) ...[
+                const SizedBox(height: 8),
+                Text(
+                  'Demo build: use code $kClientDemoOtpCode.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: onPrimary.withValues(alpha: 0.85),
+                  ),
+                ),
+              ],
               const SizedBox(height: 28),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

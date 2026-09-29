@@ -1,4 +1,6 @@
 import '../config/api_endpoints.dart';
+import '../../client_demo/client_demo_bootstrap.dart';
+import '../../client_demo/client_demo_config.dart';
 import '../models/api_response.dart';
 import '../network/api_client.dart';
 import 'app_cache.dart';
@@ -35,6 +37,11 @@ List<String> stale_table_names(DateTime? last_updated, Map<String, DateTime> tab
 
 /// Pull last_table_updates, then refresh only the tables this app knows how to fetch.
 Future<void> sync_app_cache() async {
+  if (is_client_demo_enabled) {
+    await client_demo_bootstrap_ensure_ready();
+    return;
+  }
+
   final last_updated = await get_cache_last_updated();
   final stamp_res    = await api_request('GET', ApiEndpoints.last_table_updates);
 

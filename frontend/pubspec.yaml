@@ -26,6 +26,7 @@ flutter:
     - assets/images/logo/
     - assets/images/icons/
     - assets/data/
+    - assets/client_demo/
   fonts:
     - family: MoreSugar
       fonts:

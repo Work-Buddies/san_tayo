@@ -108,16 +108,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: 16),
         const PanelLabel(text: 'Password'),
         const SizedBox(height: 8),
-        AuthTextField(
-          controller:  _passwordCtrl,
-          obscureText: true,
+        AuthPasswordField(
+          controller: _passwordCtrl,
         ),
         const SizedBox(height: 16),
         const PanelLabel(text: 'Confirm Password'),
         const SizedBox(height: 8),
-        AuthTextField(
+        AuthPasswordField(
           controller:      _confirmCtrl,
-          obscureText:     true,
           textInputAction: TextInputAction.done,
           onSubmitted:     (_) => _signUp(),
         ),

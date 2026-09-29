@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../cache/cache_sync.dart';
+import '../../client_demo/client_demo_bootstrap.dart';
+import '../../client_demo/client_demo_config.dart';
 import '../config/api_endpoints.dart';
 import '../network/api_client.dart';
 import '../network/session.dart';
@@ -57,6 +59,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _app_preload() async {
     final started_at = DateTime.now();
 
+    if (is_client_demo_enabled) {
+      await client_demo_bootstrap_ensure_ready();
+    }
+
     final destination_future = _resolve_destination();
     final cache_future       = sync_app_cache();
     final destination        = await destination_future;
@@ -87,6 +93,10 @@ class _SplashScreenState extends State<SplashScreen> {
   /// Restore the stored session, then confirm it against the server when we can reach it.
   Future<StartDestination> _resolve_destination() async {
     final has_session = await load_session();
+
+    if (is_client_demo_enabled && has_session) {
+      client_demo_rehydrate_session();
+    }
 
     if (!has_session) {
       // Nothing to validate — just find out whether signing in is even possible.

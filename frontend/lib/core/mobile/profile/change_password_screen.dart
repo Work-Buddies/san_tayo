@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:san_tayo/core/config/api_endpoints.dart';
 import 'package:san_tayo/core/mobile/auth/auth_helpers.dart';
 import 'package:san_tayo/core/mobile/profile/app_copy.dart';
+import 'package:san_tayo/core/mobile/global_widgets/password_reveal_field.dart';
 import 'package:san_tayo/core/mobile/profile/profile_widgets.dart';
 import 'package:san_tayo/core/network/api_client.dart';
 
@@ -102,30 +103,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
               children: [
                 const ProfileFieldLabel(text: 'Current Password'),
-                TextField(
+                PasswordRevealField(
                   controller: _current_ctrl,
-                  obscureText: true,
                   decoration: profileFieldDecoration(context),
+                  visibilityIconColor: colorScheme.onSurface.withValues(alpha: 0.45),
                 ),
                 const SizedBox(height: 20),
                 const ProfileFieldLabel(text: 'New Password'),
-                TextField(
+                PasswordRevealField(
                   controller: _new_ctrl,
-                  obscureText: true,
                   decoration: profileFieldDecoration(
                     context,
                     hint: 'Enter new password',
                   ),
+                  visibilityIconColor: colorScheme.onSurface.withValues(alpha: 0.45),
                 ),
                 const SizedBox(height: 20),
                 const ProfileFieldLabel(text: 'Confirm New Password'),
-                TextField(
+                PasswordRevealField(
                   controller: _confirm_ctrl,
-                  obscureText: true,
                   decoration: profileFieldDecoration(
                     context,
                     hint: 'Re-enter new password',
                   ),
+                  visibilityIconColor: colorScheme.onSurface.withValues(alpha: 0.45),
                 ),
                 const SizedBox(height: 20),
                 Container(

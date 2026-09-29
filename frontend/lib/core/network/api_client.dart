@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 import '../config/api_config.dart';
 import '../models/api_response.dart';
+import '../../client_demo/client_demo_api.dart';
+import '../../client_demo/client_demo_config.dart';
 
 String? auth_token;
 
@@ -14,6 +16,15 @@ Future<ApiResponse> api_request(
   Map<String, dynamic>? body,
   Map<String, String>? query,
 }) async {
+  if (is_client_demo_enabled) {
+    return client_demo_api_request(
+      method,
+      endpoint,
+      body:  body,
+      query: query,
+    );
+  }
+
   try {
     final uri = _build_uri(endpoint, query);
     final headers = {
