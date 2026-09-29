@@ -82,27 +82,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _upgrade_business() async {
-    setState(() => _upgrading = true);
+    showAuthMessage(context, "Business account available soon!");
+    return;
+    // setState(() => _upgrading = true);
 
-    final res = await api_request('POST', ApiEndpoints.account_upgrade_business);
+    // final res = await api_request('POST', ApiEndpoints.account_upgrade_business);
 
-    if (!mounted) {
-      return;
-    }
+    // if (!mounted) {
+    //   return;
+    // }
 
-    setState(() => _upgrading = false);
+    // setState(() => _upgrading = false);
 
-    if (res.code == 1 && res.data != null) {
-      await cache_account(res.data);
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-      showAuthMessage(context, res.msg);
-      return;
-    }
+    // if (res.code == 1 && res.data != null) {
+    //   await cache_account(res.data);
+    //   if (!mounted) {
+    //     return;
+    //   }
+    //   setState(() {});
+    //   showAuthMessage(context, res.msg);
+    //   return;
+    // }
 
-    showAuthMessage(context, res.msg);
+    // showAuthMessage(context, res.msg);
   }
 
   Future<void> _logout() async {

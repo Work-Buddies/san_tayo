@@ -73,12 +73,10 @@ Future<void> _commit_home_bar(bool keep) async {
 }
 
 Future<void> _show_home_bar() async {
-  // Android keeps the status bar hidden. iOS already shows it, so only the
-  // home indicator comes back.
   if (defaultTargetPlatform == TargetPlatform.android) {
     await SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
-      overlays: const [SystemUiOverlay.bottom],
+      overlays: const [SystemUiOverlay.top, SystemUiOverlay.bottom],
     );
     await _android_home_bar('show');
     return;
@@ -92,7 +90,11 @@ Future<void> _show_home_bar() async {
 
 Future<void> _hide_home_bar() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // Manual top-only: immersiveSticky would hide the status bar too.
+    await SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: const [SystemUiOverlay.top],
+    );
     await _android_home_bar('hide');
     return;
   }

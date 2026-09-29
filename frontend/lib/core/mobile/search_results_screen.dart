@@ -296,7 +296,7 @@ class ResultsShortcutRow extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            clipBehavior: Clip.none,
+            clipBehavior: Clip.hardEdge,
             child: Row(
               children: [
                 ResultsFilterChip(
