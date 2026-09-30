@@ -59,6 +59,13 @@ android {
             }
         }
     }
+
+    applicationVariants.configureEach {
+        outputs.configureEach {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "san_tayo_v${flutter.versionName}.apk"
+        }
+    }
 }
 
 kotlin {
